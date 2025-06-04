@@ -17,62 +17,91 @@ def text_extractor(file_name):
     print("Function1 completed")
     return text
 
-def summarise_data(data):
+def summarise_data(data , jurisdiction):
 # Define your prompt
-    prompt = f'''You are a senior legal expert specializing in document analysis and plain-language summaries. I'm providing a legal document as an array where each index contains one page of content: {data}
+    prompt = f'''LEGAL DOCUMENT RISK & COMPLIANCE ANALYSIS PROMPT
+You are a senior legal expert specializing in document analysis and risk assessment for jurisdiction = {jurisdiction}. I'm providing a legal document as an array where each index contains one page of content: {data}
+CRITICAL MISSION: Provide extensive risk analysis with specific legal precedents, statutes, and case law from {jurisdiction} - NOT a summary. Explain WHY each provision creates legal risk by citing actual laws, regulations, and court decisions.
+MANDATORY RISK ANALYSIS FRAMEWORK:
+1. CONTRACTUAL LIABILITY EXPOSURE ANALYSIS:
 
-Your task: Risk Terms & Legal Analysis Prompt
-Create a comprehensive risk and legal compliance summary achieving 100% accuracy in exactly 150-250 words, accessible to non-lawyers.
-CRITICAL REQUIREMENTS - DO NOT OMIT ANY:
-Risk Terms & Exposure Analysis:
+Cite specific {jurisdiction} contract law statutes governing liability limitations
+Reference relevant case precedents on enforceability of liability caps
+Analyze indemnification scope against {jurisdiction} indemnity law requirements
+Quote specific statutory provisions on consequential damages exclusions
+Identify conflicts with {jurisdiction} consumer protection laws
 
-ALL liability limitations, caps, and exclusions with exact dollar amounts/percentages
-EVERY indemnification obligation, scope, and financial exposure
-ALL insurance requirements, minimum coverage amounts, and proof obligations
-EVERY termination trigger, breach condition, and default scenario
-Complete force majeure provisions and risk allocation terms
-ALL warranty disclaimers, limitation periods, and consequential damage exclusions
-EVERY liquidated damages clause, penalty provision, and remedy limitation
+2. REGULATORY COMPLIANCE RISK ASSESSMENT:
 
-Legal Compliance & Governing Framework:
+Cite specific {jurisdiction} employment law statutes and potential violations
+Reference data protection regulations and breach notification requirements
+Analyze against {jurisdiction} business licensing and regulatory filing obligations
+Quote relevant industry-specific compliance statutes
+Identify potential violations of {jurisdiction} unfair competition laws
 
-Complete governing law, jurisdiction, venue, and dispute resolution mechanisms
-ALL regulatory compliance requirements and industry-specific legal obligations
-EVERY statutory disclosure requirement and regulatory filing obligation
-Complete intellectual property indemnification and infringement liability
-ALL data protection, privacy law compliance, and security breach obligations
-EVERY employment law, labor regulation, and worker classification requirement
-Complete environmental, safety, and health regulatory compliance terms
+3. ENFORCEMENT & REMEDIAL RISK ANALYSIS:
 
-Additional Critical Elements:
+Cite {jurisdiction} civil procedure rules on injunctive relief standards
+Reference specific statutes on attorney fee recovery provisions
+Analyze termination provisions against {jurisdiction} wrongful termination law
+Quote relevant precedents on liquidated damages enforceability
+Assess dispute resolution clauses against {jurisdiction} arbitration statutes
 
-ALL defined terms with complete legal definitions and risk implications
-EVERY notice requirement, cure period, and procedural compliance obligation
-Complete assignment restrictions and change of control provisions
-ALL customer non-diversion clauses and competitive restriction terms
+4. INTELLECTUAL PROPERTY & CONFIDENTIALITY RISKS:
 
-MANDATORY STRUCTURE (numbered points):
-1. \033[1;34mDocument type/purpose\033[0m (10-15 words)
-2. \033[1;34mKey parties and roles\033[0m (15-20 words)  
-3. \033[1;34mALL obligations with specifics\033[0m (80-100 words) - Include ALL categories, exclusions, disclosure rights, restrictions
-4. \033[1;34mFinancial terms/penalties\033[0m (20-30 words) - Include "irreparable injury" and "complete legal costs"
-5. \033[1;34mALL timelines/deadlines\033[0m (15-25 words)
-6. \033[1;34mBreach consequences\033[0m (15-25 words)
-7. \033[1;34mKey legal provisions\033[0m (15-25 words)
+Cite {jurisdiction} trade secret protection statutes and requirements
+Reference specific case law on reasonable confidentiality measures
+Analyze IP assignment provisions against {jurisdiction} employment law
+Quote relevant statutes on employee invention rights
+Assess non-compete enforceability under {jurisdiction} restraint of trade law
 
-FORMAT WITH ANSI COLORS:
-- \033[1;32mKey terms/definitions\033[0m (bright green)
-- \033[1;31mConsequences/penalties/warnings\033[0m (bright red)
-- \033[1;33mTimeframes/numbers/deadlines\033[0m (bright yellow)
-- \033[1mBold emphasis\033[0m for critical points
+5. FINANCIAL & OPERATIONAL EXPOSURE:
 
-FINAL VERIFICATION: Confirm you've included EVERY provision, exclusion, disclosure right, timeline, consequence, and legal detail. Missing ANY substantive element = incomplete summary.
-    
-    return only the final data form and not rest of the text or working behind getting that text'''
+Cite {jurisdiction} commercial law on payment obligations and default
+Reference specific bankruptcy code provisions affecting contract terms
+Analyze insurance requirements against {jurisdiction} insurance regulations
+Quote relevant statutes on penalty and forfeiture limitations
+Assess force majeure provisions against {jurisdiction} contract frustration law
+
+MANDATORY OUTPUT STRUCTURE:
+
+\033[1;34mDocument Classification & Legal Framework\033[0m - State document type and cite governing {jurisdiction} legal framework
+\033[1;34mParty Risk Allocation Analysis\033[0m - Identify each party's legal exposure with statutory references
+\033[1;34mContractual Obligation Risk Matrix\033[0m - Analyze each obligation against {jurisdiction} law:
+
+\033[1;32mLegal basis for enforceability\033[0m (cite specific statutes)
+\033[1;31mRisk of non-compliance\033[0m (cite penalties/consequences)
+\033[1;33mMitigation requirements\033[0m (cite compliance standards)
+
+
+\033[1;34mFinancial Liability Exposure Analysis\033[0m - Cite {jurisdiction} damages law and precedents
+\033[1;34mTemporal Compliance Risk Assessment\033[0m - Analyze all deadlines against {jurisdiction} limitations periods
+\033[1;34mBreach Consequence Legal Analysis\033[0m - Cite specific {jurisdiction} breach remedies and enforcement mechanisms
+\033[1;34mRegulatory Compliance Gap Analysis\033[0m - Identify potential violations of {jurisdiction} laws
+
+CRITICAL LEGAL CITATION REQUIREMENTS:
+
+Quote specific statute numbers and sections
+Cite relevant case names and holdings
+Reference applicable regulatory codes
+Include specific penalty amounts from statutes
+Quote exact language from relevant laws
+
+RISK SEVERITY INDICATORS:
+
+\033[1;31mHIGH RISK\033[0m: Potential criminal liability, regulatory sanctions, significant financial exposure
+\033[1;33mMEDIUM RISK\033[0m: Civil liability, compliance violations, operational disruption
+\033[1;32mMANAGED RISK\033[0m: Standard commercial risk with adequate protections
+
+FINAL VERIFICATION MANDATE:
+Every risk identified MUST be supported by specific {jurisdiction} legal authority. No generic statements. Every provision MUST be analyzed against actual law with citations.
+OUTPUT REQUIREMENT:
+Return comprehensive risk analysis with extensive legal citations - NO SUMMARY. Explain legal basis for each risk using {jurisdiction} statutes, regulations, and case precedents.'''
 
     # Send the prompt and get response
     response = model.generate_content(prompt)
     clean_response = response.text.replace("**", "")
     print(clean_response)
 
-summarise_data(text_extractor("./legal_docs_1.pdf"))
+juris = input("What is your jurisdictions = \n")
+summarise_data(text_extractor("./legal_docs_1.pdf") , juris)

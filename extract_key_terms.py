@@ -1,6 +1,7 @@
 import google.generativeai as genai
 import fitz
-
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 # Configure API key
 genai.configure(api_key="AIzaSyA23skfhuiaYRBvTysoLXqp_TQx07Lg1lY")
 
@@ -73,25 +74,25 @@ Validate all timeframes match document specifications exactly
 
 ASCII FLOWCHART FORMAT:
 ┌─────────────────┐    ◊─────────────────◊
-│ \033[1;34m[Art.X] PROCESS\033[0m │ ──► ◊ \033[1;32m[Art.Y] CONDITION\033[0m ◊
+│ \033[Art.X] PROCESS\033 │ ──► ◊ \033[Art.Y] CONDITION\033 ◊
 └─────────────────┘    ◊─────────────────◊
        │                       │
        ▼                  ┌────┴────┐
-┌─────────────┐           │ \033[1;33mYES│NO\033[0m │
-│\033[1;31m[Art.Z]BREACH→\033[0m│           └─────────┘
-│\033[1;31mCONSEQUENCE\033[0m   │
+┌─────────────┐           │ \033YES│NO\033 │
+│\033[Art.Z]BREACH→\033[0m│           └─────────┘
+│\033CONSEQUENCE\033[0m   │
 └─────────────┘
 
 Allow as much branching as possible to decrease the height of the flowchart as it should not be overwhleming for the lay man user to see the flowchart as you need to keep in mind that common people will also be using this software
 COLOR CODING WITH LEGAL PRECISION:
 
-\033[1;34m[Art.#] Document Structure/Definitions\033[0m (bright blue)
-\033[1;32m[Art.#] Obligations/Duties/Requirements\033[0m (bright green)
-\033[1;31m[Art.#] Breaches/Penalties/Consequences\033[0m (bright red)
-\033[1;33m[Art.#] Timeframes/Conditions/Triggers\033[0m (bright yellow)
-\033[1;35m[Art.#] Exceptions/Rights/Permissions\033[0m (bright magenta)
-\033[1;36m[Art.#] Key Definitions/Scope\033[0m (bright cyan)
-\033[1;37m[Art.#] Procedural/Administrative\033[0m (bright white)
+\033[Art.#] Document Structure/Definitions\033 (bright blue)
+\033[Art.#] Obligations/Duties/Requirements\033[(bright green)
+\033[Art.#] Breaches/Penalties/Consequences\033 (bright red)
+\033[Art.#] Timeframes/Conditions/Triggers\033 (bright yellow)
+\033[Art.#] Exceptions/Rights/Permissions\033 (bright magenta)
+\033[Art.#] Key Definitions/Scope\033 (bright cyan)
+\033[Art.#] Procedural/Administrative\033 (bright white)
 
 MANDATORY STRUCTURE SEQUENCE:
 
@@ -113,6 +114,21 @@ OUTPUT: Return ONLY the complete ASCII flowchart with ANSI colors achieving 100%
     # Send the prompt and get response
     response = model.generate_content(prompt)
     clean_response = response.text.replace("**", "")
-    print(clean_response)
+    # print(clean_response)
+    return clean_response
 
-key_words_extractor(text_extractor("./legal_docs_1.pdf"))
+
+def save_output_to_pdf(output_text, filename="output.pdf"):
+    c = canvas.Canvas(filename, pagesize=letter)
+    width, height = letter
+
+    # Write each line on a new line in the PDF
+    y = height - 40  # Start from top of the page
+    for line in output_text.split('\n'):
+        c.drawString(40, y, line)
+        y -= 15  # Move down by 15 points for each new line
+
+    c.save()
+    print(f"Output written to {filename}")
+
+save_output_to_pdf(key_words_extractor(text_extractor("./legal_docs_1.pdf")))
