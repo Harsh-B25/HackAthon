@@ -1,0 +1,173 @@
+data = {
+    "agreement_date": r"\underline{June 6, 2025}",
+    "company_name": r"\underline{ExampleTech Inc.}",
+    "company_jurisdiction": r"\underline{Delaware, USA}",
+    "company_address": r"\underline{123 Innovation Drive, Silicon Valley, CA}",
+    "consultant_name": r"\underline{Jane Doe Consulting}",
+    "consultant_jurisdiction": r"\underline{California, USA}",
+    "consultant_address": r"\underline{456 Strategy Lane, Los Angeles, CA}",
+    "purpose_description": r"\underline{technical consulting, software architecture, and AI advisory services}",
+    "confidentiality_term_years": r"\underline{5}",
+    "governing_law": r"\underline{California, USA}",
+    "company_signatory_name": r"\underline{John Smith}",
+    "company_signatory_title": r"\underline{CEO}",
+    "consultant_signatory_name": r"\underline{Jane Doe}",
+    "consultant_signatory_title": r"\underline{Principal Consultant}",
+}
+
+import os 
+import subprocess
+
+latex_content = rf"""\documentclass[12pt]{{article}}
+\usepackage[utf8]{{inputenc}}
+\usepackage[a4paper, margin=1in]{{geometry}}
+\setlength{{\parindent}}{{0pt}}
+\setlength{{\parskip}}{{1em}}
+
+\begin{{document}}
+
+\section*{{CONFIDENTIALITY AGREEMENT FOR CONSULTANTS AND CONTRACTORS}}
+
+This Confidentiality Agreement (the "Agreement") is made and entered into on this \textbf{{{data["agreement_date"]}}} by and between:
+
+\textbf{{Company:}} {data["company_name"]}, a company organized and existing under the laws of {data["company_jurisdiction"]}, with its principal office at {data["company_address"]} (hereinafter referred to as the "Company"),
+
+and
+
+\textbf{{Consultant/Contractor:}} {data["consultant_name"]}, an individual or entity organized and existing under the laws of {data["consultant_jurisdiction"]}, with its principal office at {data["consultant_address"]} (hereinafter referred to as the "Consultant" or "Contractor").
+
+The Company and the Consultant/Contractor may collectively be referred to as the “Parties” and individually as a “Party.”
+
+WHEREAS, the Company wishes to engage the Consultant/Contractor to provide certain services and/or products that may require the sharing of confidential and proprietary information;
+
+WHEREAS, the Consultant/Contractor understands the importance of safeguarding the Company’s confidential information and agrees to be bound by the terms and conditions of this Agreement in order to protect the Company’s interests;
+
+NOW, THEREFORE, in consideration of the mutual covenants and promises contained herein, the Parties agree as follows:
+
+\section*{{1. DEFINITIONS}}
+
+1.1 \textbf{{Confidential Information:}} "Confidential Information" refers to all non-public, proprietary, or sensitive information, whether written, oral, electronic, or otherwise, disclosed by the Company to the Consultant/Contractor. Confidential Information includes, but is not limited to, business strategies, financial data, marketing plans, research and development information, trade secrets, designs, drawings, source code, product specifications, know-how, and customer data. Confidential Information also includes any third-party information that the Company is required to keep confidential.
+
+1.2 \textbf{{Purpose:}} "Purpose" refers to the specific tasks, projects, or services for which the Company is disclosing Confidential Information to the Consultant/Contractor. The Purpose of this Agreement is limited to enabling the Consultant/Contractor to perform {data["purpose_description"]}.
+
+1.3 \textbf{{Disclosing Party and Receiving Party:}} The "Disclosing Party" refers to the Party disclosing Confidential Information, while the "Receiving Party" refers to the Party receiving Confidential Information under this Agreement.
+
+1.4 \textbf{{Representatives:}} "Representatives" refer to the employees, agents, consultants, advisors, and other individuals acting on behalf of either Party in connection with the Purpose. Representatives are bound by confidentiality obligations as specified in this Agreement.
+
+\section*{{2. SCOPE OF AGREEMENT}}
+
+2.1 \textbf{{Confidentiality Obligations:}} The Consultant/Contractor agrees to treat all Confidential Information as strictly confidential and will not disclose, divulge, or communicate it to any third party without the prior written consent of the Company. The Confidential Information shall be protected using at least the same degree of care that the Consultant/Contractor uses to protect its own confidential information, but in no case less than reasonable care.
+
+2.2 \textbf{{Use of Confidential Information:}} The Consultant/Contractor shall use the Confidential Information solely for the Purpose and shall not use it for any other purpose, including but not limited to, personal benefit, competitive advantage, or disclosure to other third parties.
+
+2.3 \textbf{{Disclosure to Representatives:}} The Consultant/Contractor may disclose Confidential Information only to its Representatives who need to know such information for the Purpose, provided that each Representative is bound by obligations of confidentiality and non-use at least as stringent as those contained in this Agreement. The Consultant/Contractor shall be responsible for any breach of confidentiality obligations by its Representatives.
+
+2.4 \textbf{{Limitation on Reproduction:}} The Consultant/Contractor shall not copy, reproduce, or store Confidential Information, except as reasonably required to fulfill the Purpose. Any copies made shall include all relevant proprietary rights notices.
+
+2.5 \textbf{{Disclosure Required by Law:}} If the Consultant/Contractor is legally required to disclose any Confidential Information (by court order, regulatory requirements, or otherwise), it shall provide prompt written notice to the Company, if legally permitted, to enable the Company to seek a protective order or other appropriate remedy.
+
+\section*{{3. EXCLUSIONS FROM CONFIDENTIALITY}}
+
+3.1 Publicly Available Information: Confidential Information does not include information that is or becomes publicly known through no wrongful act or breach of this Agreement by the Consultant/Contractor.
+
+3.2 Independently Developed Information: Confidential Information does not include information independently developed by the Consultant/Contractor without reference to, or use of, the Company's Confidential Information, as documented by written records.
+
+3.3 Previously Known Information: Confidential Information does not include information that was lawfully known to the Consultant/Contractor prior to disclosure by the Company, as evidenced by written records.
+
+3.4 Rightfully Obtained Information: Confidential Information does not include information lawfully received by the Consultant/Contractor from a third party who is not under a confidentiality obligation to the Company.
+
+\section*{{4. TERM AND TERMINATION}}
+
+4.1 \textbf{{Term of Confidentiality Obligations:}} The confidentiality obligations set forth in this Agreement shall continue for a period of {data["confidentiality_term_years"]} years following the termination or expiration of this Agreement, or until the Confidential Information no longer qualifies as confidential, whichever is later.
+
+4.2 \textbf{{Return or Destruction of Confidential Information:}} Upon termination or expiration of this Agreement, or upon written request by the Company, the Consultant/Contractor shall promptly return or destroy all materials containing Confidential Information, including but not limited to physical documents, electronic records, and any copies thereof. The Consultant/Contractor shall provide a written certification of destruction if requested by the Company.
+
+\section*{{5. OWNERSHIP AND INTELLECTUAL PROPERTY RIGHTS}}
+
+5.1 \textbf{{Ownership of Confidential Information:}} All Confidential Information disclosed by the Company shall remain the exclusive property of the Company. Nothing in this Agreement grants the Consultant/Contractor any rights, title, or interest in or to the Confidential Information, except the limited right to use it for the Purpose.
+
+5.2 \textbf{{No Transfer of Intellectual Property:}} This Agreement does not constitute a transfer, assignment, or license of any intellectual property rights in the Confidential Information. The Consultant/Contractor acknowledges that the Confidential Information is protected under copyright, trade secret, and other intellectual property laws.
+
+5.3 \textbf{{Work Product:}} Any work product, including inventions, discoveries, developments, improvements, or derivative works created by the Consultant/Contractor in connection with the Purpose and using the Confidential Information shall be the exclusive property of the Company, and the Consultant/Contractor hereby assigns any and all rights, title, and interest in such work product to the Company.
+
+\section*{{6. WARRANTIES AND REPRESENTATIONS}}
+
+6.1 \textbf{{No Warranty by Disclosing Party:}} The Company makes no representations or warranties, express or implied, with respect to the accuracy, completeness, or usefulness of the Confidential Information. The Company shall not be liable for any damages or losses resulting from the use of Confidential Information by the Consultant/Contractor.
+
+6.2 \textbf{{Authority to Disclose:}} The Company warrants that it has the right and authority to disclose the Confidential Information to the Consultant/Contractor for the Purpose.
+
+6.3 \textbf{{Consultant’s/Contractor’s Representations:}} The Consultant/Contractor represents and warrants that it will not use the Confidential Information in violation of any applicable law, including, but not limited to, intellectual property, data protection, and privacy laws.
+
+\section*{{7. REMEDIES FOR BREACH}}
+
+7.1 \textbf{{Injunctive Relief:}} The Consultant/Contractor acknowledges that any unauthorized use or disclosure of the Confidential Information may cause irreparable harm to the Company, for which monetary damages may be insufficient. Accordingly, the Company shall have the right to seek injunctive or other equitable relief in the event of a breach or threatened breach of this Agreement by the Consultant/Contractor, without the need to post a bond.
+
+7.2 \textbf{{Damages:}} In addition to injunctive relief, the Company may seek damages arising from the unauthorized use or disclosure of the Confidential Information by the Consultant/Contractor. Such damages may include, but are not limited to, compensatory damages, attorney fees, and court costs.
+
+7.3 \textbf{{Indemnification:}} The Consultant/Contractor agrees to indemnify and hold harmless the Company from any and all losses, damages, liabilities, and costs (including attorney’s fees) arising from the Consultant’s/Contractor’s unauthorized use or disclosure of Confidential Information or any breach of this Agreement.
+
+\section*{{8. RETURN OF INFORMATION}}
+
+Upon completion of the Purpose or upon termination of this Agreement, the Consultant/Contractor agrees to promptly return or destroy all Confidential Information in its possession or control, including any notes, summaries, or analyses derived from the Confidential Information. The Consultant/Contractor shall provide written certification of such destruction upon request by the Company.
+
+\section*{{9. MISCELLANEOUS}}
+
+9.1 \textbf{{Governing Law:}} This Agreement shall be governed by and construed in accordance with the laws of {data["governing_law"]}, without regard to its conflict of law provisions.
+
+9.2 \textbf{{Entire Agreement:}} This Agreement constitutes the entire agreement between the Parties with respect to the subject matter herein and supersedes all prior or contemporaneous agreements, understandings, or communications, whether oral or written.
+
+9.3 \textbf{{Amendment and Waiver:}} Any amendment to this Agreement must be in writing and signed by both Parties. No waiver of any provision of this Agreement shall be deemed a waiver of any other provision, nor shall any waiver of a breach constitute a waiver of any future breach.
+
+9.4 \textbf{{Severability:}} If any provision of this Agreement is found to be invalid, illegal, or unenforceable, the remaining provisions shall continue in full force and effect, and the Parties shall negotiate in good faith to replace the invalid or unenforceable provision with a valid, enforceable provision that achieves the intent of the original provision.
+
+9.5 \textbf{{Assignment:}} The Consultant/Contractor may not assign its rights or obligations under this Agreement without the prior written consent of the Company. Any purported assignment in violation of this section shall be null and void.
+
+9.6 \textbf{{Notices:}} All notices required under this Agreement shall be in writing and shall be deemed delivered when sent by registered mail, return receipt requested, or by a recognized courier service, to the addresses of the Parties as set forth above, or to such other addresses as a Party may designate by written notice to the other Party.
+
+9.7 \textbf{{Headings:}} The headings used in this Agreement are for convenience only and shall not affect the interpretation of any provision of this Agreement.
+
+\section*{{10. COUNTERPARTS}}
+
+This Agreement may be executed in counterparts, each of which shall be deemed an original, and all of which together shall constitute one and the same instrument. Electronic signatures shall have the same force and effect as original signatures.
+
+\vspace{{1cm}}
+
+\textbf{{IN WITNESS WHEREOF, the Parties have executed this Confidentiality Agreement as of the Effective Date.}}
+
+\vspace{{1cm}}
+
+\textbf{{Company}} \\
+Signature: \underline{{\hspace{{6cm}}}} \\
+Name: {data["company_signatory_name"]} \\
+Title: {data["company_signatory_title"]} \\
+Date: \underline{{\hspace{{5cm}}}}
+
+\vspace{{1cm}}
+
+\textbf{{Consultant/Contractor}} \\
+Signature: \underline{{\hspace{{6cm}}}} \\
+Name: {data["consultant_signatory_name"]} \\
+Title: {data["consultant_signatory_title"]} \\
+Date: \underline{{\hspace{{5cm}}}}
+
+\end{{document}}
+"""
+
+
+
+
+# === Step 3: Save to .tex file ===
+filename = "confidentiality.tex"
+with open(filename, "w", encoding="utf-8") as f:
+    f.write(latex_content)
+
+# === Step 4: Compile LaTeX to PDF ===
+subprocess.run(["pdflatex", filename])
+
+# === Step 5: Clean up ===
+# aux_files = ["confidentiality.aux", "confidentiality.log"]
+# for aux in aux_files:
+#     if os.path.exists(aux):
+#         os.remove(aux)
+
+print("✅ PDF generated: confidentiality.pdf")
