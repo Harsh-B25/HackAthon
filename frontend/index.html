@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LegalAI Pro - Advanced Legal Document Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <!-- Navigation -->
+    <header id="navbar">
+        <nav class="nav-container">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                LegalAI Pro
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#workflows">AI Workflows</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span>AI-Powered Legal Analysis</span>
+            </div>
+            <h1 class="hero-title">
+                Transform Legal Documents with
+                <span class="gradient-text">Intelligent AI</span>
+            </h1>
+            <p class="hero-description">
+                Harness the power of three specialized AI workflows to analyze, summarize, and extract critical insights from complex legal documents with unprecedented accuracy and speed.
+            </p>
+            <div class="hero-buttons">
+                <a href="#workflows" class="cta-button primary">
+                    <span>Start Analysis</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#demo" class="cta-button secondary">
+                    <i class="fas fa-play"></i>
+                    <span>Watch Demo</span>
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Accuracy</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">10x</div>
+                    <div class="stat-label">Faster</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Document Types</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="floating-card" data-depth="0.2">
+                <i class="fas fa-file-contract"></i>
+            </div>
+            <div class="floating-card" data-depth="0.4">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="floating-card" data-depth="0.6">
+                <i class="fas fa-chart-line"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Workflows Section -->
+    <section id="workflows" class="ai-workflows">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Three Powerful AI Workflows</h2>
+                <p class="section-subtitle">Each AI specialized for different aspects of legal document analysis</p>
+            </div>
+
+            <div class="workflows-grid">
+                <!-- AI 1: Document Summary -->
+                <div class="workflow-card summary-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-glow"></div>
+                    <div class="workflow-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>Document Summary AI</h3>
+                    <p>Intelligent extraction and condensation of key information from complex legal documents into clear, actionable summaries.</p>
+                    
+                    <ul class="workflow-features">
+                        <li>Executive summary generation</li>
+                        <li>Key clause identification</li>
+                        <li>Party obligation mapping</li>
+                        <li>Timeline extraction</li>
+                        <li>Multi-language support</li>
+                    </ul>
+
+                    <div class="workflow-interface">
+                        <div class="upload-area" id="summary-upload">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Drop document here or click to upload</p>
+                            <input type="file" id="summary-file" accept=".pdf,.doc,.docx" hidden>
+                        </div>
+                        <div class="center_div">
+                            <a href="#workflows" class="cta-button primary">
+                                <span>Generate Summary</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI 2: Risk Analysis -->
+                <div class="workflow-card risks-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-glow"></div>
+                    <div class="workflow-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>Risk Analysis AI</h3>
+                    <p>Advanced risk assessment and vulnerability detection to identify potential legal exposures and compliance issues.</p>
+                    
+                    <ul class="workflow-features">
+                        <li>Liability assessment</li>
+                        <li>Compliance gap analysis</li>
+                        <li>Contractual risk scoring</li>
+                        <li>Regulatory violation detection</li>
+                        <li>Mitigation recommendations</li>
+                    </ul>
+
+                    <div class="workflow-interface">
+                        <div class="upload-area" id="risk-upload">
+                            <i class="fas fa-shield-alt"></i>
+                            <p>Drop document here or click to upload</p>
+                            <input type="file" id="risk-file" accept=".pdf,.doc,.docx" hidden>
+                        </div>
+                        <div class="center_div" id="start_analysis">
+                            <a href="#workflows" class="cta-button primary">
+                                <span>Start Analysis</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="result-area" id="risk-result"></div>
+                    </div>
+                </div>
+
+                <!-- AI 3: Key Terms Extractor -->
+                <div class="workflow-card terms-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card-glow"></div>
+                    <div class="workflow-icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <h3>Key Terms Extractor AI</h3>
+                    <p>Precise identification and categorization of critical legal terms, definitions, and provisions within documents.</p>
+                    
+                    <ul class="workflow-features">
+                        <li>Term definition mapping</li>
+                        <li>Legal concept categorization</li>
+                        <li>Cross-reference analysis</li>
+                        <li>Jurisdiction-specific terms</li>
+                        <li>Glossary generation</li>
+                    </ul>
+
+                    <div class="workflow-interface">
+                        <div class="upload-area" id="terms-upload">
+                            <i class="fas fa-tags"></i>
+                            <p>Drop document here or click to upload</p>
+                            <input type="file" id="terms-file" accept=".pdf,.doc,.docx" hidden>
+                        </div>
+                        <div class="center_div">
+                            <a href="#workflows" class="cta-button primary">
+                                <span>Extract Terms</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="result-area" id="terms-result"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose LegalAI Pro?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>Process complex legal documents in seconds, not hours</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Bank-Grade Security</h3>
+                    <p>Enterprise-level encryption and privacy protection</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Multi-Jurisdiction</h3>
+                    <p>Support for legal systems worldwide</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Advanced Analytics</h3>
+                    <p>Deep insights and predictive analysis</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Ready to Transform Your Legal Workflow?</h2>
+            <p class="section-subtitle">Get started with LegalAI Pro today</p>
+        </div>
+    </section>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loader">
+            <div class="loader-inner">
+                <div class="loader-line-wrap">
+                    <div class="loader-line"></div>
+                </div>
+                <div class="loader-line-wrap">
+                    <div class="loader-line"></div>
+                </div>
+                <div class="loader-line-wrap">
+                    <div class="loader-line"></div>
+                </div>
+                <div class="loader-line-wrap">
+                    <div class="loader-line"></div>
+                </div>
+                <div class="loader-line-wrap">
+                    <div class="loader-line"></div>
+                </div>
+            </div>
+        </div>
+        <p class="loading-text">Processing your document...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
