@@ -20,103 +20,176 @@ def text_extractor(file_name):
 
 def key_words_extractor(data):
 # Define your prompt
-    prompt = f'''You are a senior legal expert specializing in document analysis and visual flowchart creation. I'm providing a legal document as an array where each index contains one page of content: {data}
-Your task: Create a comprehensive, small , concise, reduced height, increased width/branching legal flowchart using ASCII art and ANSI colors for terminal display that achieves 100% accuracy by capturing EVERY provision.
-CRITICAL ACCURACY REQUIREMENTS:
+    prompt = f'''# Enhanced Legal Document Analysis Prompt - Structured PDF Format
 
-Extract EVERY article/section number and map to flowchart elements
-Include ALL obligations, rights, exceptions, and consequences without omission
-Verify each provision against source document by article reference
-Cross-reference all temporal elements, parties, and legal concepts
-Ensure no substantive provision is missing or misrepresented
+    ## Role Definition
+    You are a senior legal expert specializing in comprehensive document analysis and professional legal documentation. Your expertise spans contract law, regulatory compliance, and legal terminology across multiple jurisdictions including U.S., India, and international frameworks.
 
-MANDATORY COMPLETENESS CHECKLIST:
-□ All contractual obligations (must/shall/will) with article citations
-□ All rights & permissions (may/can) with specific conditions
-□ All prohibitions (cannot/will not) with scope limitations
-□ All exceptions (if/unless/except) with triggering conditions
-□ All consequences (breach/violation results) with remedy types
-□ All temporal elements (timeframes/duration/survival) with exact periods
-□ All definitions with complete scope as defined in document
-□ All party relationships and role-specific obligations
-□ All notice/disclosure requirements with procedural details
-□ All assignment/ownership provisions with intellectual property aspects
-□ All termination conditions and post-termination obligations
-□ All enforceability and modification provisions
-ENHANCED LEGAL CATEGORIZATION:
+    ## Input Requirements
+    - Legal document provided as structured data: {data}
+    - Each array index represents one complete page of the source document
+    - Reference document structure: Internship Contract Agreement (4 pages, 13 sections)
 
-Primary Obligations: Core duties with performance standards
-Secondary Obligations: Supporting duties (notice, cooperation, etc.)
-Conditional Rights: Permissions dependent on circumstances
-Absolute Prohibitions: Never-allowed activities regardless of context
-Conditional Prohibitions: Restricted activities with exceptions
-Immediate Consequences: Instant effects of breach/compliance
-Future Consequences: Long-term effects and ongoing obligations
-Survival Provisions: Post-termination continuing obligations
-Modification/Waiver Rules: How agreement can be changed
-Dispute Resolution: Enforcement mechanisms and jurisdiction
+    ## Primary Objective
+    Create a professionally formatted PDF document that maintains the EXACT structural format of the provided reference document while providing 100% accurate legal analysis and enhanced educational content.
 
-PRECISION FLOWCHART MAPPING:
+    ## Document Structure Requirements (MANDATORY - DO NOT DEVIATE)
 
-Each flowchart node must reference specific article/section number
-Decision diamonds must show exact conditional language from document
-Timeline branches must display precise duration periods
-Exception paths must capture complete conditional logic
-Consequence nodes must specify remedy type and enforcement method
+    ### Page 1: Title Page and Document Introduction
+    **Title**: "Comprehensive Legal Analysis: Essential Terms and Provisions"
+    **Subtitle**: [Source Document Name] - Professional Legal Commentary
+    **Document Metadata**:
+    - Analysis Date: [Current Date]
+    - Total Sections Analyzed: [Number]
+    - Jurisdictional Scope: Multi-jurisdictional Analysis
+    - Prepared by: Senior Legal Expert
 
-VERIFICATION PROTOCOL:
+    ### Page 2-3: Executive Summary and Key Findings
+    **Executive Summary Section**:
+    - Document classification and legal nature
+    - Primary parties and their legal relationship
+    - Critical legal obligations and rights summary
+    - Risk assessment overview
+    - Compliance requirements summary
 
-Map each article number to flowchart location
-Confirm no legal concept appears in document but not in flowchart
-Verify all cross-references between provisions are visually connected
-Ensure conditional logic mirrors document's exact language
-Validate all timeframes match document specifications exactly
+    **Key Legal Themes Identified**:
+    - List 5-7 major legal themes from the document
+    - Each theme with brief explanation and section references
 
-ASCII FLOWCHART FORMAT:
-┌─────────────────┐    ◊─────────────────◊
-│ \033[Art.X] PROCESS\033 │ ──► ◊ \033[Art.Y] CONDITION\033 ◊
-└─────────────────┘    ◊─────────────────◊
-       │                       │
-       ▼                  ┌────┴────┐
-┌─────────────┐           │ \033YES│NO\033 │
-│\033[Art.Z]BREACH→\033[0m│           └─────────┘
-│\033CONSEQUENCE\033[0m   │
-└─────────────┘
+    ### Page 4 onwards: Detailed Legal Term Analysis
+    **CRITICAL**: Follow the exact numbering and sectional structure of the source document
 
-Allow as much branching as possible to decrease the height of the flowchart as it should not be overwhleming for the lay man user to see the flowchart as you need to keep in mind that common people will also be using this software
-COLOR CODING WITH LEGAL PRECISION:
+    For each section in the source document, provide:
 
-\033[Art.#] Document Structure/Definitions\033 (bright blue)
-\033[Art.#] Obligations/Duties/Requirements\033[(bright green)
-\033[Art.#] Breaches/Penalties/Consequences\033 (bright red)
-\033[Art.#] Timeframes/Conditions/Triggers\033 (bright yellow)
-\033[Art.#] Exceptions/Rights/Permissions\033 (bright magenta)
-\033[Art.#] Key Definitions/Scope\033 (bright cyan)
-\033[Art.#] Procedural/Administrative\033 (bright white)
+    #### Section [X]. [Original Section Title]
+    **Original Provision Summary**: [Exact content from source with article citations]
 
-MANDATORY STRUCTURE SEQUENCE:
+    **Legal Term Analysis**: [Key legal terms from this section]
 
-Document header with full title and nature
-Party identification with role-specific obligations
-Definitions section with complete scope mapping
-Primary obligation clusters with article cross-references
-Conditional obligation branches with exact trigger conditions
-Prohibition networks with exception pathways
-Temporal obligation flows with survival provisions
-Breach consequence trees with remedy specifications
-Administrative procedure flows (notices, modifications)
-Termination cascade with post-termination obligations
+    **Essential Legal Definitions**:
+    - **[Term 1]**: 
+    - Definition: [Precise legal definition]
+    - Legal Significance: [Why this term matters legally]
+    - Jurisdictional Context: [Relevant laws/cases from U.S., India, international]
+    - Practical Application: [Real-world examples]
+    - Compliance Requirements: [What parties must do]
+    - Risk Assessment: [Consequences of non-compliance]
 
-FINAL VERIFICATION REQUIREMENT:
-Before output, mentally audit: "Can I trace every single provision in the source document to a specific location in this flowchart?" If answer is not 100% yes, revise until complete.
-OUTPUT: Return ONLY the complete ASCII flowchart with ANSI colors achieving 100% document coverage - no explanatory text, no omissions, no approximations.'''
+    - **[Term 2]**: [Same format]
+    - **[Additional Terms]**: [Same format]
+
+    **Section-Specific Legal Analysis**:
+    - Rights created by this section
+    - Obligations imposed by this section  
+    - Exceptions or limitations
+    - Temporal elements (if any)
+    - Cross-references to other sections
+
+    ## Enhanced Accuracy Requirements (100% Completeness)
+
+    ### Provision Extraction Standards
+    - **Article Mapping**: Extract EVERY section, subsection, bullet point, and clause
+    - **Temporal Precision**: Capture exact dates, timeframes, notice periods
+    - **Party Analysis**: Identify all entities, roles, and specific obligations
+    - **Cross-Reference Validation**: Verify internal document references
+    - **Legal Consequence Mapping**: Detail all breach scenarios and remedies
+
+    ### Mandatory Completeness Verification Matrix
+    For EACH section, verify capture of:
+    □ **Primary Obligations** - All "must/shall/will/agrees to" provisions
+    □ **Conditional Rights** - All "may/can/entitled to" with qualifying conditions  
+    □ **Explicit Prohibitions** - All "cannot/shall not/prohibited from" clauses
+    □ **Exception Clauses** - All "unless/except/provided that/if" conditions
+    □ **Temporal Requirements** - All deadlines, durations, survival periods
+    □ **Procedural Steps** - All notice, documentation, approval requirements
+    □ **Defined Relationships** - All party roles and hierarchical structures
+    □ **Breach Consequences** - All penalties, termination rights, damages
+    □ **Modification Rules** - All amendment and waiver provisions
+    □ **Enforceability Terms** - All governing law and dispute resolution clauses
+
+    ### Legal Term Selection Criteria
+    From the source document, identify and analyze:
+    - **Foundational Terms**: Basic legal concepts essential to document understanding
+    - **Risk Terms**: Provisions that create significant legal exposure
+    - **Procedural Terms**: Requirements for proper document execution
+    - **Relationship Terms**: Definitions of party roles and obligations
+    - **Temporal Terms**: Time-sensitive provisions and deadlines
+    - **Compliance Terms**: Regulatory and policy requirements
+    - **Enforcement Terms**: Dispute resolution and remedial provisions
+
+    ## Professional Formatting Standards (Maintain Original Structure)
+
+    ### Typography Requirements
+    - **Font**: Times New Roman, 12pt body text
+    - **Section Headers**: Bold, 14pt, matching original document numbering
+    - **Subsection Headers**: Bold, 12pt, underlined
+    - **Legal Terms**: Bold on first use, italicized for emphasis
+    - **Citations**: Bracketed, 10pt font
+    - **Margins**: 1-inch all sides
+    - **Line Spacing**: 1.15 for readability
+
+    ### Visual Structure Requirements
+    - **Page Breaks**: Match original document pagination flow
+    - **Section Numbering**: EXACTLY mirror source document structure
+    - **Bullet Points**: Maintain original formatting where present
+    - **Paragraph Structure**: Preserve original paragraph breaks
+    - **Footer**: Page numbers, document title, analysis date
+
+    ### Content Organization Requirements
+    - **Preserve Original Flow**: Analysis follows exact sequence of source document
+    - **Section Integrity**: Each original section gets dedicated analysis space
+    - **Cross-Reference Maintenance**: Preserve all internal document references
+    - **Appendix Structure**: If source has appendices, maintain in analysis
+
+    ## Quality Assurance Protocol
+
+    ### Accuracy Validation Steps
+    1. **Line-by-Line Verification**: Every sentence in source document accounted for
+    2. **Citation Accuracy**: All section references verified against source
+    3. **Legal Definition Verification**: All definitions checked against legal standards
+    4. **Jurisdictional Appropriateness**: All legal contexts verified for accuracy
+    5. **Completeness Audit**: Final check against completeness matrix
+
+    ### Professional Review Standards
+    - **Legal Accuracy**: All interpretations legally sound and current
+    - **Accessibility**: Content understandable to both lawyers and non-lawyers
+    - **Consistency**: Terminology and formatting uniform throughout
+    - **Comprehensiveness**: No substantive provision omitted or misrepresented
+
+    ## Output Specifications
+
+    ### Final Deliverable Requirements
+    - **PDF-Ready Content**: Formatted for direct PDF generation
+    - **No Extraneous Content**: No flowcharts, debugging notes, or process comments
+    - **Complete Analysis**: Every section of source document addressed
+    - **Professional Presentation**: Legal document standards maintained
+    - **Structural Fidelity**: Original document organization preserved exactly
+
+    ### Content Exclusions
+    - No ASCII art, diagrams, or visual flowcharts
+    - No development comments or metadata
+    - No prompt acknowledgments or processing notes
+    - No reformatting of original document structure
+    - No consolidation of original sections
+
+    ## Success Criteria Validation
+
+    The analysis achieves 100% accuracy when:
+    1. **Structural Fidelity**: Document follows exact format of source document
+    2. **Provision Coverage**: Every clause, sentence, and obligation captured
+    3. **Legal Accuracy**: All interpretations jurisdictionally appropriate and current
+    4. **Professional Standards**: Document meets legal industry formatting standards
+    5. **Educational Value**: Content serves as comprehensive legal reference tool
+    6. **Completeness Verification**: All checklist items confirmed complete
+
+    **Final Instruction**: Generate ONLY the complete PDF content following the exact structural format of the source document. Maintain all original section numbers, titles, and organizational flow while providing comprehensive legal analysis within each section. No additional commentary, processing notes, or structural modifications permitted.
+'''
 
     # Send the prompt and get response
     response = model.generate_content(prompt)
     clean_response = response.text.replace("**", "")
     # print(clean_response)
     return clean_response
-
 
 def save_output_to_pdf(output_text, filename="output.pdf"):
     c = canvas.Canvas(filename, pagesize=letter)
