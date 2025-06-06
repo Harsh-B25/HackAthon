@@ -243,12 +243,17 @@ header.scrolled {
     animation: fadeInUp 0.8s ease-out;
 }
 
+.better_title{
+    font-size:6rem;
+    width:100%;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
 .hero-title {
     font-size: 3.5rem;
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: 1.5rem;
-    animation: fadeInUp 0.8s ease-out 0.2s both;
 }
 
 .gradient-text {
@@ -309,10 +314,15 @@ header.scrolled {
     transform: translateY(-2px);
 }
 
+/* stats.css */
 .hero-stats {
     display: flex;
+    justify-content: space-around;
+    align-items: center;
     gap: 3rem;
+    padding: 40px 0;
     animation: fadeInUp 0.8s ease-out 0.8s both;
+    font-family: Arial, sans-serif;
 }
 
 .stat {
@@ -324,12 +334,26 @@ header.scrolled {
     font-weight: 800;
     color: #06b6d4;
     margin-bottom: 0.5rem;
+    transition: all 0.5s ease-in-out;
 }
 
 .stat-label {
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.6);
 }
+
+/* Optional fade-in animation */
+@keyframes fadeInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 
 .hero-visual {
     display: flex;
@@ -583,8 +607,72 @@ header.scrolled {
 .center_div{
     display:flex;
     justify-content:center;
+    align-items: center;
+    align-self: center;
+    width: 100%;
 }
 #start_analysis{
     width:max-content;
-    margin:3rem;
+    margin:1.5rem;
+    margin-left:4rem;
+}
+
+#risk-upload{
+    margin-top:5rem;
+}
+
+/* features.css */
+.features-grid {
+    display: flex;
+    /* grid-template-rows: 1fr 1fr 1fr 1fr; */
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 2rem;
+    font-family: Arial, sans-serif;
+    width: 100%;
+}
+
+.feature-card {
+    width:60%;
+    text-align: center;
+    background: #1e293b;
+    color: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    color: #06b6d4;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    margin-bottom: 0.5rem;
+}
+
+.feature-card p {
+    min-height: 60px; /* Prevent layout shift during typing */
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+.scale_svg{
+    scale:0.5;
+    padding: 0;
+    margin: 0;
+}
+
+#svg_p{
+    width: 17.5rem;
+    height: 17.5rem;
+    display: inline-block;
+    vertical-align: middle;
 }
