@@ -1,5 +1,6 @@
 import google.generativeai as genai
 import fitz
+import sys
 
 # Configure API key
 genai.configure(api_key="AIzaSyA23skfhuiaYRBvTysoLXqp_TQx07Lg1lY")
@@ -14,7 +15,7 @@ def text_extractor(file_name):
 
     for page in doc:
         text.append(page.get_text())
-    print("Function1 completed")
+    # print("Function1 completed")
     return text
 
 def summarise_data(data , jurisdiction):
@@ -63,22 +64,51 @@ Analyze insurance requirements against {jurisdiction} insurance regulations
 Quote relevant statutes on penalty and forfeiture limitations
 Assess force majeure provisions against {jurisdiction} contract frustration law
 
-MANDATORY OUTPUT STRUCTURE:
+MANDATORY STRUCTURE: Return the summary formatted as an HTML <ol> list with inline <span> styles to show color and bold text on a webpage.
 
-\033[1;34mDocument Classification & Legal Framework\033[0m - State document type and cite governing {jurisdiction} legal framework
-\033[1;34mParty Risk Allocation Analysis\033[0m - Identify each party's legal exposure with statutory references
-\033[1;34mContractual Obligation Risk Matrix\033[0m - Analyze each obligation against {jurisdiction} law:
+Each heading must be:
 
-\033[1;32mLegal basis for enforceability\033[0m (cite specific statutes)
-\033[1;31mRisk of non-compliance\033[0m (cite penalties/consequences)
-\033[1;33mMitigation requirements\033[0m (cite compliance standards)
+Bold
 
+Colored blue (#1E90FF)
 
-\033[1;34mFinancial Liability Exposure Analysis\033[0m - Cite {jurisdiction} damages law and precedents
-\033[1;34mTemporal Compliance Risk Assessment\033[0m - Analyze all deadlines against {jurisdiction} limitations periods
-\033[1;34mBreach Consequence Legal Analysis\033[0m - Cite specific {jurisdiction} breach remedies and enforcement mechanisms
-\033[1;34mRegulatory Compliance Gap Analysis\033[0m - Identify potential violations of {jurisdiction} laws
+Use inline spans for:
 
+📘 Legal terms – bright green (#32CD32)
+
+⚠️ Penalties or consequences – bright red (#FF4500)
+
+⏰ Timeframes, dates, deadlines – golden yellow (#FFD700)
+
+⚖️ Jurisdiction names – golden yellow (#FFD700)
+
+🔹 Sections to be returned (as <li> items):
+Document Classification & Legal Framework
+Describe the type of legal document and cite the applicable legal framework for {jurisdiction}.
+
+Party Risk Allocation Analysis
+Identify all key parties involved and analyze each party’s legal responsibilities and exposure under {jurisdiction} statutes.
+
+Contractual Obligation Risk Matrix
+For each major obligation, include:
+
+📘 <span style="color:#32CD32; font-weight:bold;">Legal basis for enforceability</span> (cite specific clauses/statutes)
+
+⚠️ <span style="color:#FF4500; font-weight:bold;">Risk of non-compliance</span> (state penalties or effects)
+
+⏰ <span style="color:#FFD700; font-weight:bold;">Mitigation requirements</span> (mention audit/compliance expectations)
+
+Financial Liability Exposure Analysis
+Explain the possible monetary damages or liabilities under {jurisdiction} laws, including doctrines like “irreparable injury” or “complete legal costs.”
+
+Temporal Compliance Risk Assessment
+Highlight all relevant deadlines and correlate them with {jurisdiction}’s statutes of limitations.
+
+Breach Consequence Legal Analysis
+Summarize the breach enforcement pathways and remedies (court action, injunctions, etc.) available under {jurisdiction}.
+
+Regulatory Compliance Gap Analysis
+Point out any sections that may violate or fail to meet the requirements of {jurisdiction} regulatory frameworks.
 CRITICAL LEGAL CITATION REQUIREMENTS:
 
 Quote specific statute numbers and sections
@@ -94,6 +124,7 @@ RISK SEVERITY INDICATORS:
 \033[1;32mMANAGED RISK\033[0m: Standard commercial risk with adequate protections
 
 FINAL VERIFICATION MANDATE:
+Remove the word HTML everywhre only focus on the topic and not the formatting. There should't be any single mention of html or the type of formatting.
 Every risk identified MUST be supported by specific {jurisdiction} legal authority. No generic statements. Every provision MUST be analyzed against actual law with citations.
 OUTPUT REQUIREMENT:
 Return comprehensive risk analysis with extensive legal citations - NO SUMMARY. Explain legal basis for each risk using {jurisdiction} statutes, regulations, and case precedents.'''
@@ -101,7 +132,7 @@ Return comprehensive risk analysis with extensive legal citations - NO SUMMARY. 
     # Send the prompt and get response
     response = model.generate_content(prompt)
     clean_response = response.text.replace("**", "")
+    clean_response = clean_response.replace("```" , "")
     print(clean_response)
 
-juris = input("What is your jurisdictions = \n")
-summarise_data(text_extractor("./legal_docs_1.pdf") , juris)
+summarise_data(text_extractor(sys.argv[1]) , "India")

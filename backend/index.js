@@ -17,19 +17,100 @@ dotenv.config();
 const PORT = process.env.PORT;
 
 import multer from "multer"
+
+import session from "express-session";
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
+let ofn;
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./public/pdf");
   },
-  filename: function (req, file, cb) {
+    filename: function (req, file, cb) {
+        ofn = file.originalname;
     crypto.randomBytes(12, function (err, bytes) {
-        const fn = bytes.toString("hex") + path.extname(file.originalname);    
+        const fn = bytes.toString("hex") + path.extname(file.originalname);   
+        // console.log(fn);
+        req.session.uniqueName = fn;
+        // console.log(req.uniqueName);
         cb(null, fn);
     })
   },
 });
 
 const upload = multer({ storage: storage });
+import { spawn } from "child_process";
+
+
+const generate_summ = (filename) => {
+    return new Promise((resolve, reject) => {
+        console.log("Data is being sent to the Python file...");
+        console.log(filename);
+        const filePath = path.join(__dirname, `./public/pdf/${filename}`);
+        const python = spawn("python", [
+          "/Users/aryangoyal/Desktop/cyfuture_hackthon/summarise.py",
+          filePath,
+        ]);
+
+        let dataString = "";
+
+        python.stdout.on("data", (data) => {
+            dataString += data.toString();
+        });
+
+        python.stderr.on("data", (err) => {
+            console.error("Python error:", err.toString());
+        });
+
+        python.on("close", (code) => {
+            console.log("Python process exited with code", code);
+            resolve(dataString); // return final output here
+        });
+
+        python.on("error", (err) => {
+            reject(err);
+        });
+    });
+};
+
+const generate_risks = (filename) => {
+  return new Promise((resolve, reject) => {
+    console.log("Data is being sent to the Python file...");
+    console.log(filename);
+    const filePath = path.join(__dirname, `./public/pdf/${filename}`);
+    const python = spawn("python", [
+      "/Users/aryangoyal/Desktop/cyfuture_hackthon/taking_out_mistakes.py",
+      filePath,
+    ]);
+
+    let dataString = "";
+
+    python.stdout.on("data", (data) => {
+      dataString += data.toString();
+    });
+
+    python.stderr.on("data", (err) => {
+      console.error("Python error:", err.toString());
+    });
+
+    python.on("close", (code) => {
+      console.log("Python process exited with code", code);
+      resolve(dataString); // return final output here
+    });
+
+    python.on("error", (err) => {
+      reject(err);
+    });
+  });
+};
+
+
 
 app.get("/", (req, res) => {
     try {      
@@ -41,18 +122,35 @@ app.get("/", (req, res) => {
         });
     }
 })
-
-app.post("/gen_sum",upload.single('pdf') ,(req, res) => {
-  res.send("Here is your generated summary");
+app.post("/analyze_document", upload.single('pdf'), (req, res) => {
+    console.log("This data has reached successfully");
+    res.redirect("/1st_feature");
 });
-
-app.post("/risk_data", upload.single("pdf"), (req, res) => {
-  res.send("Here is your risky data");
-});
-
-app.post("/key_terms", upload.single("pdf"), (req, res) => {
-  res.send("Here is your key terms");
-});
+let data;
+let data2;
+app.get("/1st_feature", async (req, res) => {
+    try {
+        console.log(req.session.uniqueName);
+        await generate_summ(req.session.uniqueName).then(summary => {
+            data = summary;
+        }).catch(err => {
+            console.error("Error:", err);
+        })
+        await generate_risks(req.session.uniqueName)
+          .then((summary) => {
+            data2 = summary;
+          })
+          .catch((err) => {
+            console.error("Error:", err);
+          });
+        res.render("1st_feature.ejs", { data,ofn,data2 });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: "The file has not been chosen yet",
+        })
+    }
+})
 
 app.listen(PORT, (err) => {
     if (err) {

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Animated UI with Risk Analysis</title>
+  <link rel="stylesheet" href="stylesheets/1st_feature.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Animated Background -->
+  <div class="bg-animation">
+    <div class="floating-shapes">
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <!-- Header -->
+  <header id="header">
+    <div class="nav-container">
+        <div class="logo">
+            <img src="/image/tark_1.png" id="logo_img" alt="logo">
+        </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#analysis">Analysis</a></li>
+          <li><a href="#results">Results</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="container hero-content">
+      <div>
+        <div class="hero-badge">AI Contract Analyzer</div>
+        <h1 class="hero-title">Analyze Your <span class="gradient-text">Contracts Instantly</span></h1>
+        <p class="hero-description">Upload legal documents and let AI handle risk detection, summaries, and compliance checks.</p>
+      </div>
+      <div class="document-info">
+        <div class="doc-meta">
+          <div class="doc-name"><%= ofn %></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Analysis Stats -->
+  <section class="analysis-stats container" id="analysis">
+    <div class="stat-card">
+      <div class="stat-icon">⚖️</div>
+      <div class="stat-number">7-8</div>
+      <div class="stat-label">Risk Clauses</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">📑</div>
+      <div class="stat-number">10-12</div>
+      <div class="stat-label">Key Terms</div>
+    </div>
+  </section>
+
+  <!-- Results Section -->
+  <section class="results-section container" id="results">
+    <div class="result-card">
+      <div class="card-header">
+        <div class="card-icon summary-icon">📝</div>
+        <h2>Summary</h2>
+        <div class="card-actions">
+          <button class="action-btn">✏️</button>
+          <button class="action-btn">📄</button>
+        </div>
+      </div>
+      <div class="card-content">
+        <p id="typing-text"><%- data %></p>
+      </div>
+    </div>
+
+    <div class="result-card">
+      <div class="card-header">
+        <div class="card-icon risk-icon">⚠️</div>
+        <h2>Risk Analysis</h2>
+      </div>
+      <div class="card-content">
+        <p><%- data2 %></p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // The text you want to "type out"
+    // const data = <%- data %>;  // assuming this is server-rendered with your data
+  
+    const typingElement = document.getElementById("typing-text");
+    let index = 0;
+  
+    function typeWriter() {
+      if (index < data.length) {
+        typingElement.innerHTML += data.charAt(index);
+        index++;
+        setTimeout(typeWriter, 50);  // adjust typing speed here (in ms)
+      }
+    }
+  
+    // Start typing when page loads
+    window.onload = () => {
+      typingElement.innerHTML = "";  // clear initially
+      typeWriter();
+    };
+  </script>
+
+</body>
+</html>

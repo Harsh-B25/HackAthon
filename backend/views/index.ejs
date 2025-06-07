@@ -25,8 +25,7 @@
     <header id="navbar">
         <nav class="nav-container">
             <div class="logo">
-                <i class="fas fa-brain"></i>
-                LegalAI Pro
+                <img src="/image/tark_1.png" id="logo_img" alt="logo">
             </div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
@@ -95,114 +94,79 @@
     <section id="workflows" class="ai-workflows">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Three Powerful AI Workflows</h2>
-                <p class="section-subtitle">Each AI specialized for different aspects of legal document analysis</p>
+                <h2 class="section-title">Two Powerful AI Solutions</h2>
+                <p class="section-subtitle">Complete legal document analysis and generation platform</p>
             </div>
-
+    
             <div class="workflows-grid">
-                <!-- AI 1: Document Summary -->
-                <div class="workflow-card summary-card" data-aos="fade-up" data-aos-delay="100">
+                <!-- AI 1: Document Analysis (Merged) -->
+                <div class="workflow-card analysis-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="card-glow"></div>
                     <div class="workflow-icon">
-                        <i class="fas fa-file-alt"></i>
+                        <i class="fas fa-file-search"></i>
                     </div>
-                    <h3>Document Summary AI</h3>
-                    <p>Intelligent extraction and condensation of key information from complex legal documents into clear, actionable summaries.</p>
+                    <h3>Document Analysis AI</h3>
+                    <p>Comprehensive legal document analysis combining summary generation, risk assessment, and key terms extraction in one powerful workflow.</p>
                     
                     <ul class="workflow-features">
                         <li>Executive summary generation</li>
-                        <li>Key clause identification</li>
-                        <li>Party obligation mapping</li>
-                        <li>Timeline extraction</li>
-                        <li>Multi-language support</li>
+                        <li>Risk assessment and liability scoring</li>
+                        <li>Key terms and clause identification</li>
+                        <li>Compliance gap analysis</li>
+                        <li>Multi-format document support</li>
                     </ul>
-
+    
                     <div class="workflow-interface">
-                        
-                        <form enctype="multipart/form-data" action="/gen_sum" method="post">
-                            <div class="upload-area" id="summary-upload">
+                        <form enctype="multipart/form-data" action="/analyze_document" method="post">
+                            <div class="upload-area" id="analysis-upload">
                                 <i class="fas fa-cloud-upload-alt"></i>
                                 <p>Drop document here or click to upload</p>
-                                    <input class="file_upload" type="file" name="pdf" id="summary-file" accept=".pdf,.doc,.docx" hidden>
+                                    <input class="file_upload" type="file" name="pdf" id="analysis-file" accept=".pdf,.doc,.docx" hidden>
                             </div>
                             <div class="center_div">
                                 <button type="submit" class="cta-button primary">
-                                    <span>Generate Summary</span>
+                                    <span>Analyze Document</span>
                                     <i class="fas fa-arrow-right"></i>
                                 </button>
                             </div>
                         </form>
                     </div>
-                    
                 </div>
-
-                <!-- AI 2: Risk Analysis -->
-                <div class="workflow-card risks-card" data-aos="fade-up" data-aos-delay="200">
+    
+                <!-- AI 2: Contract Generator -->
+                <div class="workflow-card generator-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="card-glow"></div>
                     <div class="workflow-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
+                        <i class="fas fa-file-contract"></i>
                     </div>
-                    <h3>Risk Analysis AI</h3>
-                    <p>Advanced risk assessment and vulnerability detection to identify potential legal exposures and compliance issues.</p>
+                    <h3>Contract Generator AI</h3>
+                    <p>Professional contract creation with customizable templates for various business and legal scenarios.</p>
                     
                     <ul class="workflow-features">
-                        <li>Liability assessment</li>
-                        <li>Compliance gap analysis</li>
-                        <li>Contractual risk scoring</li>
-                        <li>Regulatory violation detection</li>
-                        <li>Mitigation recommendations</li>
+                        <li>Service agreement templates</li>
+                        <li>Employment contracts</li>
+                        <li>Non-disclosure agreements</li>
+                        <li>Partnership agreements</li>
+                        <li>Custom clause insertion</li>
                     </ul>
-
+    
                     <div class="workflow-interface">
-                            <form enctype="multipart/form-data" action="/risk_data" method="post">
-                                <div class="upload-area" id="risk-upload">
-                                    <i class="fas fa-shield-alt"></i>
-                                        <p>Drop document here or click to upload</p>
-                                            <input class="file_upload" name="pdf" type="file" id="risk-file" accept=".pdf,.doc,.docx" hidden>
-                                </div>
-                                <div class="center_div" id="start_analysis">
-                                    <button type="submit" class="cta-button primary">Start Analysis <i class="fas fa-arrow-right"></i></button>
-                                </div>
-                                </form>
-                        
-                        <div class="result-area" id="risk-result"></div>
-                    </div>
-                </div>
-
-                <!-- AI 3: Key Terms Extractor -->
-                <div class="workflow-card terms-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="card-glow"></div>
-                    <div class="workflow-icon">
-                        <i class="fas fa-key"></i>
-                    </div>
-                    <h3>Key Terms Extractor AI</h3>
-                    <p>Precise identification and categorization of critical legal terms, definitions, and provisions within documents.</p>
-                    
-                    <ul class="workflow-features">
-                        <li>Term definition mapping</li>
-                        <li>Legal concept categorization</li>
-                        <li>Cross-reference analysis</li>
-                        <li>Jurisdiction-specific terms</li>
-                        <li>Glossary generation</li>
-                    </ul>
-
-                    <div class="workflow-interface">
-                            <form  enctype="multipart/form-data" action="/key_terms" method="post">
-                                <div class="upload-area" id="terms-upload">
-                                    <i class="fas fa-tags"></i>
-                                    <p>Drop document here or click to upload</p>
-                                        <input class="file_upload" name="pdf" type="file" id="terms-file" accept=".pdf,.doc,.docx" multiple hidden>
+                            <form  enctype="multipart/form-data" action="/generate_contract" method="post">
+                                <div class="upload-area" id="contract-upload">
+                                    <i class="fas fa-edit"></i>
+                                    <p>Select template type and fill requirements</p>
+                                        <input class="file_upload" name="template" type="text" id="contract-template" hidden>
                                 </div>
                                 <div class="center_div">
                                     <button type="submit" class="cta-button primary">
-                                        <span>Extract Terms</span>
+                                        <span>Generate Contract</span>
                                         <i class="fas fa-arrow-right"></i>
                                     </button>
                                 </div>
                             </form>
                         </div>
                         
-                        <div class="result-area" id="terms-result"></div>
+                        <div class="result-area" id="contract-result"></div>
                     </div>
                 </div>
             </div>

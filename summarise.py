@@ -1,5 +1,6 @@
 import google.generativeai as genai
 import fitz
+import sys
 
 # Configure API key
 genai.configure(api_key="AIzaSyA23skfhuiaYRBvTysoLXqp_TQx07Lg1lY")
@@ -14,7 +15,7 @@ def text_extractor(file_name):
 
     for page in doc:
         text.append(page.get_text())
-    print("Function1 completed")
+    # print("Function1 completed")
     return text
 
 def summarise_data(data):
@@ -33,27 +34,36 @@ CRITICAL REQUIREMENTS - DO NOT OMIT ANY:
 - Customer non-diversion clauses and business opportunity restrictions
 
 MANDATORY STRUCTURE (numbered points):
-1. \033[1;34mDocument type/purpose\033[0m (10-15 words)
-2. \033[1;34mKey parties and roles\033[0m (15-20 words)  
-3. \033[1;34mALL obligations with specifics\033[0m (80-100 words) - Include ALL categories, exclusions, disclosure rights, restrictions
-4. \033[1;34mFinancial terms/penalties\033[0m (20-30 words) - Include "irreparable injury" and "complete legal costs"
-5. \033[1;34mALL timelines/deadlines\033[0m (15-25 words)
-6. \033[1;34mBreach consequences\033[0m (15-25 words)
-7. \033[1;34mKey legal provisions\033[0m (15-25 words)
+1. <span style="color:#1E90FF; font-weight:bold;">Document type/purpose</span> (10-15 words)
+2. <span style="color:#1E90FF; font-weight:bold;">Key parties and roles</span> (15-20 words)
+3. <span style="color:#1E90FF; font-weight:bold;">ALL obligations with specifics</span> (80-100 words) - Include 
+<span style="color:#32CD32; font-weight:bold;">ALL categories</span>, exclusions, 
+<span style="color:#32CD32; font-weight:bold;">disclosure rights</span>, restrictions
+4. <span style="color:#1E90FF; font-weight:bold;">Financial terms/penalties</span> (20-30 words) - Include "<span style="color:#FF4500; font-weight:bold;">irreparable injury</span>" and "<span style="color:#FF4500; font-weight:bold;">complete legal costs</span>"
+5. <span style="color:#1E90FF; font-weight:bold;">ALL timelines/deadlines</span> (<span style="color:#FFD700; font-weight:bold;">15-25 words</span>)
+6. <span style="color:#1E90FF; font-weight:bold;">Breach consequences</span> (15-25 words)
+7. <span style="color:#1E90FF; font-weight:bold;">Key legal provisions</span> (15-25 words)
 
-FORMAT WITH ANSI COLORS:
-- \033[1;32mKey terms/definitions\033[0m (bright green)
-- \033[1;31mConsequences/penalties/warnings\033[0m (bright red)
-- \033[1;33mTimeframes/numbers/deadlines\033[0m (bright yellow)
-- \033[1mBold emphasis\033[0m for critical points
+FORMAT GUIDELINES FOR WEB DISPLAY:
+- Use <span style="color:#32CD32; font-weight:bold;">bright green</span> text for Key terms/definitions
+- Use <span style="color:#FF4500; font-weight:bold;">bright red</span> text for Consequences/penalties/warnings
+- Use <span style="color:#FFD700; font-weight:bold;">bright yellow</span> text for Timeframes/numbers/deadlines
+- Use <b>bold emphasis</b> for critical points
+
+IMPORTANT:
+Please output the content as raw HTML with styled <span> tags and <b> tags.
+
+When rendering this output in EJS, use unescaped output tags like <%- data %> to ensure the HTML styles are applied and the colored, bold formatting appears correctly on the webpage.
 
 FINAL VERIFICATION: Confirm you've included EVERY provision, exclusion, disclosure right, timeline, consequence, and legal detail. Missing ANY substantive element = incomplete summary.
     
-    return only the final data form and not rest of the text or working behind getting that text'''
+    return only the text and nothing else'''
 
     # Send the prompt and get response
     response = model.generate_content(prompt)
     clean_response = response.text.replace("**", "")
+    clean_response = clean_response.replace("```" , "")
+    clean_response = clean_response.replace("html" , "")
     print(clean_response)
 
-summarise_data(text_extractor("./legal_docs_1.pdf"))
+summarise_data(text_extractor(sys.argv[1]))

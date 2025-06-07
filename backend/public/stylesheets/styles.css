@@ -676,3 +676,6 @@ header.scrolled {
     display: inline-block;
     vertical-align: middle;
 }
+#logo_img{
+    width:7rem;
+}
