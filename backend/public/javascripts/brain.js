@@ -79,3 +79,17 @@ upload_area.forEach((upload,index) => {
   });
 });
   
+
+const uploadArea = document.getElementById("analysis-upload");
+const fileInput = document.getElementById("analysis-file");
+const uploadText = document.getElementById("upload-text");
+const form = document.getElementById("upload-form");
+
+
+fileInput.addEventListener("change", () => {
+  if (fileInput.files.length > 0) {
+    const fileName = fileInput.files[0].name;
+    uploadText.innerHTML = `📄 <strong>${fileName}</strong> selected...`;
+    form.submit(); // ⬅️ submit the form once file is selected
+  }
+});

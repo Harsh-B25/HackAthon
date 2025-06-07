@@ -117,11 +117,11 @@
                     </ul>
     
                     <div class="workflow-interface">
-                        <form enctype="multipart/form-data" action="/analyze_document" method="post">
+                        <form id="upload-form" action="/analyze_document" method="POST" enctype="multipart/form-data">
                             <div class="upload-area" id="analysis-upload">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                                <p>Drop document here or click to upload</p>
-                                    <input class="file_upload" type="file" name="pdf" id="analysis-file" accept=".pdf,.doc,.docx" hidden>
+                              <i class="fas fa-cloud-upload-alt"></i>
+                              <p id="upload-text">Drop document here or click to upload</p>
+                              <input class="file_upload" type="file" name="pdf" id="analysis-file" accept=".pdf,.doc,.docx" hidden>
                             </div>
                             <div class="center_div">
                                 <button type="submit" class="cta-button primary">
@@ -301,7 +301,6 @@
     </div>
    
 
-    <script src="/javascripts/brain.js"></script>
 </body>
-<script src="./brain.js"></script>
+<script src="/javascripts/brain.js"></script>
 </html>
