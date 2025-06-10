@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.6.10)  10 JUN 2025 21:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.6.10)  10 JUN 2025 23:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -158,7 +158,7 @@ Here is how much of TeX's memory you used:
 </usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx1
 2.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mr12.pfb>
-Output written on confidentiality.pdf (6 pages, 53188 bytes).
+Output written on confidentiality.pdf (6 pages, 52554 bytes).
 PDF statistics:
  33 PDF objects out of 1000 (max. 8388607)
  20 compressed objects within 1 object stream

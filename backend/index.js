@@ -55,7 +55,7 @@ const generate_summ = (filename) => {
         console.log(filename);
         const filePath = path.join(__dirname, `./public/pdf/${filename}`);
         const python = spawn("python", [
-          "/Users/aryangoyal/Desktop/cyfuture_hackthon/summarise.py",
+          "../summarise.py",
           filePath,
         ]);
 
@@ -86,7 +86,7 @@ const generate_risks = (filename) => {
     console.log(filename);
     const filePath = path.join(__dirname, `./public/pdf/${filename}`);
     const python = spawn("python", [
-      "/Users/aryangoyal/Desktop/cyfuture_hackthon/taking_out_mistakes.py",
+      "../taking_out_mistakes.py",
       filePath,
     ]);
 
@@ -117,7 +117,7 @@ const extract_flowchart = (filename) => {
     console.log(filename);
     const filePath = path.join(__dirname, `./public/pdf/${filename}`);
     const python = spawn("python", [
-      "/Users/aryangoyal/Desktop/cyfuture_hackthon/extract_key_terms.py",
+      "../extract_key_terms.py",
       filePath,
     ]);
 
@@ -165,7 +165,7 @@ const generate_pdf = (
     const scriptPath = `/Users/aryangoyal/Desktop/cyfuture_hackthon/cloning work/HackAthon/${type}.py`;
     const outputPath = `/Users/aryangoyal/Desktop/cyfuture_hackthon/backend/confidentiality.pdf`;
     const python = spawn("python", [
-      `/Users/aryangoyal/Desktop/cyfuture_hackthon/cloning work/HackAthon/${type}`,
+      `../cloning work/HackAthon/${type}`,
       agreement_date,
       company_name,
       company_jurisdiction,
