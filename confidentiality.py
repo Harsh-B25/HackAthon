@@ -1,18 +1,25 @@
+import sys
+(_, agreement_date, company_name, company_jurisdiction, company_address,
+ consultant_name, consultant_jurisdiction, consultant_address, purpose_description,
+ confidentiality_term_years, governing_law, company_signatory_name, company_signatory_title,
+ consultant_signatory_name, consultant_signatory_title) = sys.argv
+
+# Create data dictionary
 data = {
-    "agreement_date": r"\underline{June 6, 2025}",
-    "company_name": r"\underline{ExampleTech Inc.}",
-    "company_jurisdiction": r"\underline{Delaware, USA}",
-    "company_address": r"\underline{123 Innovation Drive, Silicon Valley, CA}",
-    "consultant_name": r"\underline{Jane Doe Consulting}",
-    "consultant_jurisdiction": r"\underline{California, USA}",
-    "consultant_address": r"\underline{456 Strategy Lane, Los Angeles, CA}",
-    "purpose_description": r"\underline{technical consulting, software architecture, and AI advisory services}",
-    "confidentiality_term_years": r"\underline{5}",
-    "governing_law": r"\underline{California, USA}",
-    "company_signatory_name": r"\underline{John Smith}",
-    "company_signatory_title": r"\underline{CEO}",
-    "consultant_signatory_name": r"\underline{Jane Doe}",
-    "consultant_signatory_title": r"\underline{Principal Consultant}",
+    "agreement_date": rf"\underline{{{agreement_date}}}",
+    "company_name": rf"\underline{{{company_name}}}",
+    "company_jurisdiction": rf"\underline{{{company_jurisdiction}}}",
+    "company_address": rf"\underline{{{company_address}}}",
+    "consultant_name": rf"\underline{{{consultant_name}}}",
+    "consultant_jurisdiction": rf"\underline{{{consultant_jurisdiction}}}",
+    "consultant_address": rf"\underline{{{consultant_address}}}",
+    "purpose_description": rf"\underline{{{purpose_description}}}",
+    "confidentiality_term_years": rf"\underline{{{confidentiality_term_years}}}",
+    "governing_law": rf"\underline{{{governing_law}}}",
+    "company_signatory_name": rf"\underline{{{company_signatory_name}}}",
+    "company_signatory_title": rf"\underline{{{company_signatory_title}}}",
+    "consultant_signatory_name": rf"\underline{{{consultant_signatory_name}}}",
+    "consultant_signatory_title": rf"\underline{{{consultant_signatory_title}}}",
 }
 
 import os 
