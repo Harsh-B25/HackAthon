@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Generate PDF</title>
+  <link rel="stylesheet" href="/stylesheets/3rd_feature.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Fill in the Questions</h1>
+    <form id="pdfForm" action="/retrieving_data" method="post">
+        <div class="contract-dropdown text-center mb-6">
+            <h3 class="text-2xl font-semibold mb-4 text-gray-800">Select a Contract to Generate</h3>
+            <div class="inline-block w-full max-w-xs">
+              <select name="template" class="custom-select">
+                <option value="" disabled selected>Select a contract</option>
+                <option value="Copyright.py">Copyright</option>
+                <option value="Internship.py">Internship</option>
+                <option value="NDA.py">NDA Agreement</option>
+                <option value="room rental.py">Room Rental</option>
+                <option value="confidentiality.py">Confidentiality</option>
+                <option value="partner.py">Partnership</option>
+              </select>
+            </div>
+          </div>
+          
+          
+        <label for="agreement_date">Agreement Date:</label>
+        <input type="date" id="agreement_date" name="agreement_date" required>
+      
+        <label for="company_name">Company Name:</label>
+        <input type="text" id="company_name" name="company_name" placeholder="ExampleTech Inc." required>
+      
+        <label for="company_jurisdiction">Company Jurisdiction:</label>
+        <input type="text" id="company_jurisdiction" name="company_jurisdiction" placeholder="Delaware, USA" required>
+      
+        <label for="company_address">Company Address:</label>
+        <textarea id="company_address" name="company_address" placeholder="123 Innovation Drive, Silicon Valley, CA" rows="2" required></textarea>
+      
+        <label for="consultant_name">Consultant Name:</label>
+        <input type="text" id="consultant_name" name="consultant_name" placeholder="Jane Doe Consulting" required>
+      
+        <label for="consultant_jurisdiction">Consultant Jurisdiction:</label>
+        <input type="text" id="consultant_jurisdiction" name="consultant_jurisdiction" placeholder="California, USA" required>
+      
+        <label for="consultant_address">Consultant Address:</label>
+        <textarea id="consultant_address" name="consultant_address" placeholder="456 Strategy Lane, Los Angeles, CA" rows="2" required></textarea>
+      
+        <label for="purpose_description">Purpose Description:</label>
+        <textarea id="purpose_description" name="purpose_description" placeholder="technical consulting, software architecture, and AI advisory services" rows="3" required></textarea>
+      
+        <label for="confidentiality_term_years">Confidentiality Term (years):</label>
+        <input type="number" id="confidentiality_term_years" name="confidentiality_term_years" min="1" placeholder="5" required>
+      
+        <label for="governing_law">Governing Law:</label>
+        <input type="text" id="governing_law" name="governing_law" placeholder="California, USA" required>
+      
+        <label for="company_signatory_name">Company Signatory Name:</label>
+        <input type="text" id="company_signatory_name" name="company_signatory_name" placeholder="John Smith" required>
+      
+        <label for="company_signatory_title">Company Signatory Title:</label>
+        <input type="text" id="company_signatory_title" name="company_signatory_title" placeholder="CEO" required>
+      
+        <label for="consultant_signatory_name">Consultant Signatory Name:</label>
+        <input type="text" id="consultant_signatory_name" name="consultant_signatory_name" placeholder="Jane Doe" required>
+      
+        <label for="consultant_signatory_title">Consultant Signatory Title:</label>
+        <input type="text" id="consultant_signatory_title" name="consultant_signatory_title" placeholder="Principal Consultant" required>
+      
+        <button type="submit">Generate PDF</button>
+      </form>
+      
+
+    <h2>Generated PDF Preview</h2>
+  </div>
+</body>
+</html>

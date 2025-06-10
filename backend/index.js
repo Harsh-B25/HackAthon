@@ -1,5 +1,6 @@
 import crypto from "crypto"
 import express from "express"
+import fs from "fs";
 const app = express();
 
 app.set("view engine", "ejs")
@@ -110,6 +111,105 @@ const generate_risks = (filename) => {
   });
 };
 
+const extract_flowchart = (filename) => {
+  return new Promise((resolve, reject) => {
+    console.log("Data is being sent to the Python file...");
+    console.log(filename);
+    const filePath = path.join(__dirname, `./public/pdf/${filename}`);
+    const python = spawn("python", [
+      "/Users/aryangoyal/Desktop/cyfuture_hackthon/extract_key_terms.py",
+      filePath,
+    ]);
+
+    let dataString = "";
+
+    python.stdout.on("data", (data) => {
+      dataString += data.toString();
+    });
+
+    python.stderr.on("data", (err) => {
+      console.error("Python error:", err.toString());
+    });
+
+    python.on("close", (code) => {
+      console.log("Python process exited with code", code);
+      resolve(dataString); // return final output here
+    });
+
+    python.on("error", (err) => {
+      reject(err);
+    });
+  });
+};
+
+const generate_pdf = (
+  agreement_date,
+  company_name,
+  company_jurisdiction,
+  company_address,
+  consultant_name,
+  consultant_jurisdiction,
+  consultant_address,
+  purpose_description,
+  confidentiality_term_years,
+  governing_law,
+  company_signatory_name,
+  company_signatory_title,
+  consultant_signatory_name,
+  consultant_signatory_title,
+  type,
+  res
+) => {
+  return new Promise((resolve, reject) => {
+    console.log("Data is being sent to the Python file...");
+    const scriptPath = `/Users/aryangoyal/Desktop/cyfuture_hackthon/cloning work/HackAthon/${type}.py`;
+    const outputPath = `/Users/aryangoyal/Desktop/cyfuture_hackthon/backend/confidentiality.pdf`;
+    const python = spawn("python", [
+      `/Users/aryangoyal/Desktop/cyfuture_hackthon/cloning work/HackAthon/${type}`,
+      agreement_date,
+      company_name,
+      company_jurisdiction,
+      company_address,
+      consultant_name,
+      consultant_jurisdiction,
+      consultant_address,
+      purpose_description,
+      confidentiality_term_years,
+      governing_law,
+      company_signatory_name,
+      company_signatory_title,
+      consultant_signatory_name,
+      consultant_signatory_title,
+    ]);
+
+    python.stderr.on("data", (err) => {
+      console.error("Python error:", err.toString());
+    });
+  
+    python.on("close", (code) => {
+      console.log("Python process exited with code", code);
+      if (code === 0) {
+        // Wait 500ms to ensure the PDF file is written to disk
+        setTimeout(() => {
+          if (fs.existsSync(outputPath)) {
+            resolve(outputPath);
+          } else {
+            reject(
+              new Error(`PDF not found even though process exited with code 0`)
+            );
+          }
+        }, 500);
+      } else {
+        reject(new Error(`PDF generation failed (exit code ${code})`));
+      }
+    });
+  
+    python.on("error", (err) => {
+      console.error("Failed to start Python script:", err);
+      res.status(500).send("Internal Server Error");
+    });
+  });
+};
 
 
 app.get("/", (req, res) => {
@@ -128,6 +228,7 @@ app.post("/analyze_document", upload.single('pdf'), (req, res) => {
 });
 let data;
 let data2;
+let data3;
 app.get("/1st_feature", async (req, res) => {
     try {
         console.log(req.session.uniqueName);
@@ -143,7 +244,14 @@ app.get("/1st_feature", async (req, res) => {
           .catch((err) => {
             console.error("Error:", err);
           });
-        res.render("1st_feature.ejs", { data,ofn,data2 });
+          await extract_flowchart(req.session.uniqueName)
+            .then((summary) => {
+              data3 = summary;
+            })
+            .catch((err) => {
+              console.error("Error:", err);
+            });
+        res.render("1st_feature.ejs", { data,ofn,data2,data3 });
     } catch (err) {
         res.status(500).json({
             success: false,
@@ -152,6 +260,43 @@ app.get("/1st_feature", async (req, res) => {
     }
 })
 
+app.post("/generate_contract", (req, res) => {
+  res.render("3rd_feature.ejs");
+})
+
+app.post("/retrieving_data", async (req, res) => {
+  try {
+    const pdfPath = await generate_pdf(
+      req.body.agreement_date,
+      req.body.company_name,
+      req.body.company_jurisdiction,
+      req.body.company_address,
+      req.body.consultant_name,
+      req.body.consultant_jurisdiction,
+      req.body.consultant_address,
+      req.body.purpose_description,
+      req.body.confidentiality_term_years,
+      req.body.governing_law,
+      req.body.company_signatory_name,
+      req.body.company_signatory_title,
+      req.body.consultant_signatory_name,
+      req.body.consultant_signatory_title,
+      req.body.template
+    );
+
+    if (fs.existsSync(pdfPath)) {
+      res.setHeader("Content-Type", "application/pdf");
+      res.setHeader("Content-Disposition", "inline");
+      fs.createReadStream(pdfPath).pipe(res);
+    } else {
+      res.status(404).send("PDF not found");
+    }
+  } catch (err) {
+    console.error("Error generating PDF:", err);
+    res.status(500).send("Internal Server Error");
+  }
+
+});
 app.listen(PORT, (err) => {
     if (err) {
         console.log(err);

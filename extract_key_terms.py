@@ -1,7 +1,6 @@
 import google.generativeai as genai
 import fitz
-from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
+import sys
 # Configure API key
 genai.configure(api_key="AIzaSyA23skfhuiaYRBvTysoLXqp_TQx07Lg1lY")
 
@@ -20,188 +19,84 @@ def text_extractor(file_name):
 
 def key_words_extractor(data):
 # Define your prompt
-    prompt = f'''# Enhanced Legal Document Analysis Prompt - Structured PDF Format
+    prompt = f'''You are a senior legal expert specializing in web‑based document analysis and interactive visualization. Your input will be a legal document provided as {data}.
 
-    ## Role Definition
-    You are a senior legal expert specializing in comprehensive document analysis and professional legal documentation. Your expertise spans contract law, regulatory compliance, and legal terminology across multiple jurisdictions including U.S., India, and international frameworks.
+🎯 TASK
+Analyze the document and for an interactive flow‑chart plus a concise, styled HTML summary.
 
-    ## Input Requirements
-    - Legal document provided as structured data: {data}
-    - Each array index represents one complete page of the source document
-    - Reference document structure: Internship Contract Agreement (4 pages, 13 sections)
+🔍 PROCESSING REQUIREMENTS
+Extract all sections, clauses, and legal provisions.
 
-    ## Primary Objective
-    Create a professionally formatted PDF document that maintains the EXACT structural format of the provided reference document while providing 100% accurate legal analysis and enhanced educational content.
+Identify key terms, obligations, rights, risk factors.
 
-    ## Document Structure Requirements (MANDATORY - DO NOT DEVIATE)
+Categorize by parties, obligations, rights, risks, compliance, timeline.
 
-    ### Page 1: Title Page and Document Introduction
-    **Title**: "Comprehensive Legal Analysis: Essential Terms and Provisions"
-    **Subtitle**: [Source Document Name] - Professional Legal Commentary
-    **Document Metadata**:
-    - Analysis Date: [Current Date]
-    - Total Sections Analyzed: [Number]
-    - Jurisdictional Scope: Multi-jurisdictional Analysis
-    - Prepared by: Senior Legal Expert
+Create ≤ 20‑word summaries per section.
 
-    ### Page 2-3: Executive Summary and Key Findings
-    **Executive Summary Section**:
-    - Document classification and legal nature
-    - Primary parties and their legal relationship
-    - Critical legal obligations and rights summary
-    - Risk assessment overview
-    - Compliance requirements summary
+Assign risk levels (low / medium / high).
 
-    **Key Legal Themes Identified**:
-    - List 5-7 major legal themes from the document
-    - Each theme with brief explanation and section references
+Map dependencies between sections.
 
-    ### Page 4 onwards: Detailed Legal Term Analysis
-    **CRITICAL**: Follow the exact numbering and sectional structure of the source document
+MANDATORY STRUCTURE: Return the summary formatted as an HTML <ol> list with inline <span> styles to show color and bold text on a webpage.
 
-    For each section in the source document, provide:
+Each heading must be:
 
-    #### Section [X]. [Original Section Title]
-    **Original Provision Summary**: [Exact content from source with article citations]
+Bold
 
-    **Legal Term Analysis**: [Key legal terms from this section]
+Colored blue (#1E90FF)
 
-    **Essential Legal Definitions**:
-    - **[Term 1]**: 
-    - Definition: [Precise legal definition]
-    - Legal Significance: [Why this term matters legally]
-    - Jurisdictional Context: [Relevant laws/cases from U.S., India, international]
-    - Practical Application: [Real-world examples]
-    - Compliance Requirements: [What parties must do]
-    - Risk Assessment: [Consequences of non-compliance]
+Use inline spans for:
 
-    - **[Term 2]**: [Same format]
-    - **[Additional Terms]**: [Same format]
+📘 Legal terms – bright green (#32CD32)
 
-    **Section-Specific Legal Analysis**:
-    - Rights created by this section
-    - Obligations imposed by this section  
-    - Exceptions or limitations
-    - Temporal elements (if any)
-    - Cross-references to other sections
+⚠️ Penalties or consequences – bright red (#FF4500)
 
-    ## Enhanced Accuracy Requirements (100% Completeness)
+⏰ Timeframes, dates, deadlines – golden yellow (#FFD700)
 
-    ### Provision Extraction Standards
-    - **Article Mapping**: Extract EVERY section, subsection, bullet point, and clause
-    - **Temporal Precision**: Capture exact dates, timeframes, notice periods
-    - **Party Analysis**: Identify all entities, roles, and specific obligations
-    - **Cross-Reference Validation**: Verify internal document references
-    - **Legal Consequence Mapping**: Detail all breach scenarios and remedies
+⚖️ Jurisdiction names – golden yellow (#FFD700)
 
-    ### Mandatory Completeness Verification Matrix
-    For EACH section, verify capture of:
-    □ **Primary Obligations** - All "must/shall/will/agrees to" provisions
-    □ **Conditional Rights** - All "may/can/entitled to" with qualifying conditions  
-    □ **Explicit Prohibitions** - All "cannot/shall not/prohibited from" clauses
-    □ **Exception Clauses** - All "unless/except/provided that/if" conditions
-    □ **Temporal Requirements** - All deadlines, durations, survival periods
-    □ **Procedural Steps** - All notice, documentation, approval requirements
-    □ **Defined Relationships** - All party roles and hierarchical structures
-    □ **Breach Consequences** - All penalties, termination rights, damages
-    □ **Modification Rules** - All amendment and waiver provisions
-    □ **Enforceability Terms** - All governing law and dispute resolution clauses
+🔹 Sections to be returned (as <li> items):
 
-    ### Legal Term Selection Criteria
-    From the source document, identify and analyze:
-    - **Foundational Terms**: Basic legal concepts essential to document understanding
-    - **Risk Terms**: Provisions that create significant legal exposure
-    - **Procedural Terms**: Requirements for proper document execution
-    - **Relationship Terms**: Definitions of party roles and obligations
-    - **Temporal Terms**: Time-sensitive provisions and deadlines
-    - **Compliance Terms**: Regulatory and policy requirements
-    - **Enforcement Terms**: Dispute resolution and remedial provisions
+Contractual Obligation Risk Matrix
+For each major obligation, include:
 
-    ## Professional Formatting Standards (Maintain Original Structure)
+📘 <span style="color:#32CD32; font-weight:bold;">Legal basis for enforceability</span> (cite specific clauses/statutes)
 
-    ### Typography Requirements
-    - **Font**: Times New Roman, 12pt body text
-    - **Section Headers**: Bold, 14pt, matching original document numbering
-    - **Subsection Headers**: Bold, 12pt, underlined
-    - **Legal Terms**: Bold on first use, italicized for emphasis
-    - **Citations**: Bracketed, 10pt font
-    - **Margins**: 1-inch all sides
-    - **Line Spacing**: 1.15 for readability
+⚠️ <span style="color:#FF4500; font-weight:bold;">Risk of non-compliance</span> (state penalties or effects)
 
-    ### Visual Structure Requirements
-    - **Page Breaks**: Match original document pagination flow
-    - **Section Numbering**: EXACTLY mirror source document structure
-    - **Bullet Points**: Maintain original formatting where present
-    - **Paragraph Structure**: Preserve original paragraph breaks
-    - **Footer**: Page numbers, document title, analysis date
+⏰ <span style="color:#FFD700; font-weight:bold;">Mitigation requirements</span> (mention audit/compliance expectations)
+RISK SEVERITY INDICATORS:
 
-    ### Content Organization Requirements
-    - **Preserve Original Flow**: Analysis follows exact sequence of source document
-    - **Section Integrity**: Each original section gets dedicated analysis space
-    - **Cross-Reference Maintenance**: Preserve all internal document references
-    - **Appendix Structure**: If source has appendices, maintain in analysis
+\033[1;31mHIGH RISK\033[0m: Potential criminal liability, regulatory sanctions, significant financial exposure
+\033[1;33mMEDIUM RISK\033[0m: Civil liability, compliance violations, operational disruption
+\033[1;32mMANAGED RISK\033[0m: Standard commercial risk with adequate protections
+🧩 MANDATORY SUMMARY STRUCTURE
+Document type/purpose – 10‑15 words
 
-    ## Quality Assurance Protocol
+Key parties & roles – 15‑20 words
 
-    ### Accuracy Validation Steps
-    1. **Line-by-Line Verification**: Every sentence in source document accounted for
-    2. **Citation Accuracy**: All section references verified against source
-    3. **Legal Definition Verification**: All definitions checked against legal standards
-    4. **Jurisdictional Appropriateness**: All legal contexts verified for accuracy
-    5. **Completeness Audit**: Final check against completeness matrix
+All obligations, rights, restrictions, disclosure rights – 80‑100 words
 
-    ### Professional Review Standards
-    - **Legal Accuracy**: All interpretations legally sound and current
-    - **Accessibility**: Content understandable to both lawyers and non-lawyers
-    - **Consistency**: Terminology and formatting uniform throughout
-    - **Comprehensiveness**: No substantive provision omitted or misrepresented
+Financial terms & penalties – 20‑30 words, include “<span class="text-red-600 font-semibold">irreparable injury</span>” and “<span class="text-red-600 font-semibold">complete legal costs</span>”
 
-    ## Output Specifications
+Timelines & deadlines – 15‑25 words
 
-    ### Final Deliverable Requirements
-    - **PDF-Ready Content**: Formatted for direct PDF generation
-    - **No Extraneous Content**: No flowcharts, debugging notes, or process comments
-    - **Complete Analysis**: Every section of source document addressed
-    - **Professional Presentation**: Legal document standards maintained
-    - **Structural Fidelity**: Original document organization preserved exactly
+Breach consequences & remedies – 15‑25 words
 
-    ### Content Exclusions
-    - No ASCII art, diagrams, or visual flowcharts
-    - No development comments or metadata
-    - No prompt acknowledgments or processing notes
-    - No reformatting of original document structure
-    - No consolidation of original sections
+Key legal provisions – 15‑25 words
 
-    ## Success Criteria Validation
+✅ FINAL VERIFICATION
+Before returning, confirm you have captured every clause, exclusion, disclosure right, timeline, consequence, legal detail, and assignment or jurisdictional restriction. Nothing may be omitted—any missing element renders the summary incomplete.
 
-    The analysis achieves 100% accuracy when:
-    1. **Structural Fidelity**: Document follows exact format of source document
-    2. **Provision Coverage**: Every clause, sentence, and obligation captured
-    3. **Legal Accuracy**: All interpretations jurisdictionally appropriate and current
-    4. **Professional Standards**: Document meets legal industry formatting standards
-    5. **Educational Value**: Content serves as comprehensive legal reference tool
-    6. **Completeness Verification**: All checklist items confirmed complete
-
-    **Final Instruction**: Generate ONLY the complete PDF content following the exact structural format of the source document. Maintain all original section numbers, titles, and organizational flow while providing comprehensive legal analysis within each section. No additional commentary, processing notes, or structural modifications permitted.
+Return only the refined prompt text shown above.
 '''
 
     # Send the prompt and get response
     response = model.generate_content(prompt)
     clean_response = response.text.replace("**", "")
+    clean_response = clean_response.replace("```" , "")
+    clean_response = clean_response.replace("html" , "")
     # print(clean_response)
-    return clean_response
+    print(clean_response)
 
-def save_output_to_pdf(output_text, filename="output.pdf"):
-    c = canvas.Canvas(filename, pagesize=letter)
-    width, height = letter
-
-    # Write each line on a new line in the PDF
-    y = height - 40  # Start from top of the page
-    for line in output_text.split('\n'):
-        c.drawString(40, y, line)
-        y -= 15  # Move down by 15 points for each new line
-
-    c.save()
-    print(f"Output written to {filename}")
-
-save_output_to_pdf(key_words_extractor(text_extractor("./legal_docs_1.pdf")))
+key_words_extractor(text_extractor(sys.argv[1]))

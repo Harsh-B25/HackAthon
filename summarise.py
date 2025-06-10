@@ -20,44 +20,98 @@ def text_extractor(file_name):
 
 def summarise_data(data):
 # Define your prompt
-    prompt = f'''You are a senior legal expert specializing in document analysis and plain-language summaries. I'm providing a legal document as an array where each index contains one page of content: {data}
+    prompt = f'''Create a comprehensive summary of 150–250 words that is:
 
-Your task: Create a comprehensive summary achieving 100% accuracy in exactly 150-250 words, accessible to non-lawyers.
+100% accurate
 
-CRITICAL REQUIREMENTS - DO NOT OMIT ANY:
-- ALL specific numbers: exact time periods, dollar amounts, percentages, deadlines
-- EVERY substantive obligation, right, restriction, and exception (including all exclusions and disclosure rights)
-- ALL defined terms with their complete definitions and categories
-- EVERY penalty, consequence, remedy, and waiver provision
-- Complete governing law/jurisdiction and assignment restrictions
-- ALL return requirements, notice obligations, and moral rights waivers
-- Customer non-diversion clauses and business opportunity restrictions
+Fully inclusive of every legal detail
 
-MANDATORY STRUCTURE (numbered points):
-1. <span style="color:#1E90FF; font-weight:bold;">Document type/purpose</span> (10-15 words)
-2. <span style="color:#1E90FF; font-weight:bold;">Key parties and roles</span> (15-20 words)
-3. <span style="color:#1E90FF; font-weight:bold;">ALL obligations with specifics</span> (80-100 words) - Include 
-<span style="color:#32CD32; font-weight:bold;">ALL categories</span>, exclusions, 
-<span style="color:#32CD32; font-weight:bold;">disclosure rights</span>, restrictions
-4. <span style="color:#1E90FF; font-weight:bold;">Financial terms/penalties</span> (20-30 words) - Include "<span style="color:#FF4500; font-weight:bold;">irreparable injury</span>" and "<span style="color:#FF4500; font-weight:bold;">complete legal costs</span>"
-5. <span style="color:#1E90FF; font-weight:bold;">ALL timelines/deadlines</span> (<span style="color:#FFD700; font-weight:bold;">15-25 words</span>)
-6. <span style="color:#1E90FF; font-weight:bold;">Breach consequences</span> (15-25 words)
-7. <span style="color:#1E90FF; font-weight:bold;">Key legal provisions</span> (15-25 words)
+Easily understandable by non-lawyers
 
-FORMAT GUIDELINES FOR WEB DISPLAY:
-- Use <span style="color:#32CD32; font-weight:bold;">bright green</span> text for Key terms/definitions
-- Use <span style="color:#FF4500; font-weight:bold;">bright red</span> text for Consequences/penalties/warnings
-- Use <span style="color:#FFD700; font-weight:bold;">bright yellow</span> text for Timeframes/numbers/deadlines
-- Use <b>bold emphasis</b> for critical points
+Styled for beautiful web display
 
-IMPORTANT:
-Please output the content as raw HTML with styled <span> tags and <b> tags.
+✅ CRITICAL REQUIREMENTS – Include Every Single One:
+All specific numbers: exact time periods, percentages, dollar amounts, deadlines
 
-When rendering this output in EJS, use unescaped output tags like <%- data %> to ensure the HTML styles are applied and the colored, bold formatting appears correctly on the webpage.
+Every defined term with its full definition and category
 
-FINAL VERIFICATION: Confirm you've included EVERY provision, exclusion, disclosure right, timeline, consequence, and legal detail. Missing ANY substantive element = incomplete summary.
-    
-    return only the text and nothing else'''
+All obligations, rights, restrictions, exclusions, and disclosure rights
+
+Return requirements, notice obligations, and moral rights waivers
+
+Customer non-diversion clauses and business opportunity restrictions
+
+All penalties, remedies, consequences, including irreparable injury and complete legal cost recovery
+
+Governing law, jurisdiction, and assignment restrictions
+
+🧩 Summary Structure (Use Numbered Points):
+Document type/purpose (10–15 words)
+
+Key parties and roles (15–20 words)
+
+All obligations, rights, restrictions, and disclosure rights (80–100 words)
+
+Financial terms and penalties (20–30 words)
+
+All timelines and deadlines (15–25 words)
+
+Breach consequences and remedies (15–25 words)
+
+Key legal provisions (15–25 words)
+
+🎨 Styling Rules for Web Display:
+Use bright green for key terms and definitions
+
+Use bright red for penalties, consequences, and waivers
+
+Use bright yellow for timeframes, deadlines, and numbers
+
+Use bold for all critical concepts and points
+
+MANDATORY STRUCTURE: Return the summary formatted as an HTML <ol> list with inline <span> styles to show color and bold text on a webpage.
+
+Each heading must be:
+
+Bold
+
+Colored blue (#1E90FF)
+
+Use inline spans for:
+
+📘 Legal terms – bright green (#32CD32)
+
+⚠️ Penalties or consequences – bright red (#FF4500)
+
+⏰ Timeframes, dates, deadlines – golden yellow (#FFD700)
+
+⚖️ Jurisdiction names – golden yellow (#FFD700)
+
+🔹 Sections to be returned (as <li> items):
+
+Contractual Obligation Risk Matrix
+For each major obligation, include:
+
+📘 <span style="color:#32CD32; font-weight:bold;">Legal basis for enforceability</span> (cite specific clauses/statutes)
+
+⚠️ <span style="color:#FF4500; font-weight:bold;">Risk of non-compliance</span> (state penalties or effects)
+
+⏰ <span style="color:#FFD700; font-weight:bold;">Mitigation requirements</span> (mention audit/compliance expectations)
+RISK SEVERITY INDICATORS:
+
+\033[1;31mHIGH RISK\033[0m: Potential criminal liability, regulatory sanctions, significant financial exposure
+\033[1;33mMEDIUM RISK\033[0m: Civil liability, compliance violations, operational disruption
+\033[1;32mMANAGED RISK\033[0m: Standard commercial risk with adequate protections
+
+
+✅ Final Verification:
+Before submitting, confirm you have:
+
+Included every substantive clause
+
+Fully explained all definitions, exclusions, waivers, and consequences
+
+Only give the summary related text and not anything else. Missing even one element invalidates the summary.'''
 
     # Send the prompt and get response
     response = model.generate_content(prompt)

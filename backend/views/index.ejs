@@ -52,16 +52,10 @@
             <p class="hero-description">
                 Harness the power of three specialized AI workflows to analyze, summarize, and extract critical insights from complex legal documents with unprecedented accuracy and speed.
             </p>
-            <div class="hero-buttons">
-                <a href="#workflows" class="cta-button primary">
-                    <span>Start Analysis</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
                 <a href="#demo" class="cta-button secondary">
                     <i class="fas fa-play"></i>
                     <span>Watch Demo</span>
                 </a>
-            </div>
             <div class="hero-stats">
                 <div class="stat">
                     <div class="stat-number">99.9%</div>
@@ -150,21 +144,15 @@
                         <li>Custom clause insertion</li>
                     </ul>
     
-                    <div class="workflow-interface">
-                            <form  enctype="multipart/form-data" action="/generate_contract" method="post">
-                                <div class="upload-area" id="contract-upload">
-                                    <i class="fas fa-edit"></i>
-                                    <p>Select template type and fill requirements</p>
-                                        <input class="file_upload" name="template" type="text" id="contract-template" hidden>
-                                </div>
-                                <div class="center_div">
-                                    <button type="submit" class="cta-button primary">
-                                        <span>Generate Contract</span>
-                                        <i class="fas fa-arrow-right"></i>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+                    <div class="workflow-interface max-w-3xl mx-auto p-6 center_div">
+                        <form action="/generate_contract" method="post">
+                            <button type="submit" class="cta-button primary">
+                                <span>Generate pdf</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </form>
+                      </div>
+                      
                         
                         <div class="result-area" id="contract-result"></div>
                     </div>
