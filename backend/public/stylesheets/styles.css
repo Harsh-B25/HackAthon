@@ -1,4 +1,6 @@
 /* Reset and Base Styles */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
+
 * {
     margin: 0;
     padding: 0;
@@ -127,7 +129,7 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    padding: 1.5rem 0;
+    padding: 1rem 0;
     background: rgba(10, 10, 10, 0.8);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -136,7 +138,7 @@ header {
 }
 
 header.scrolled {
-    padding: 1rem 0;
+    padding: 0.75rem 0;
     background: rgba(10, 10, 10, 0.95);
 }
 
@@ -211,49 +213,57 @@ header.scrolled {
     transition: all 0.3s ease;
 }
 
-/* Hero Section */
+/* Hero Section - Improved to fit in viewport */
 .hero {
-    min-height: 100vh;
+    height: 100vh;
+    width: 100%;
     display: flex;
     align-items: center;
     position: relative;
     background: radial-gradient(ellipse at 50% 0%, rgba(79, 70, 229, 0.15) 0%, transparent 50%);
-    padding: 8rem 2rem 4rem;
+    padding: 5rem;
+    overflow: hidden;
 }
 
 .hero-content {
     max-width: 1400px;
+    /* height:100rem; */
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: 3rem;
     align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 80px 0 20px;
 }
 
 .hero-badge {
     display: inline-block;
-    padding: 0.5rem 1rem;
+    padding: 6rem;
     background: rgba(79, 70, 229, 0.1);
     border: 1px solid rgba(79, 70, 229, 0.3);
     border-radius: 50px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 500;
     color: #06b6d4;
-    margin-bottom: 1.5rem;
+    /* margin-bottom: 1rem; */
     animation: fadeInUp 0.8s ease-out;
 }
 
 .better_title{
-    font-size:6rem;
-    width:100%;
+    font-size: 4rem;
+    width: 100%;
+    line-height: 1;
+    margin-bottom: 1rem;
     animation: fadeInUp 0.8s ease-out 0.2s both;
 }
 
 .hero-title {
-    font-size: 3.5rem;
+    font-size: 2.8rem;
     font-weight: 800;
     line-height: 1.1;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .gradient-text {
@@ -264,17 +274,17 @@ header.scrolled {
 }
 
 .hero-description {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 2.5rem;
-    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
     animation: fadeInUp 0.8s ease-out 0.4s both;
 }
 
 .hero-buttons {
     display: flex;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
+    gap: 1rem;
+    margin-bottom: 2rem;
     animation: fadeInUp 0.8s ease-out 0.6s both;
 }
 
@@ -282,11 +292,11 @@ header.scrolled {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 1rem 2rem;
+    padding: 0.8rem 1.5rem;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
@@ -314,13 +324,13 @@ header.scrolled {
     transform: translateY(-2px);
 }
 
-/* stats.css */
+/* Hero Stats - Optimized for space */
 .hero-stats {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    gap: 3rem;
-    padding: 40px 0;
+    gap: 2rem;
+    padding: 20px 0;
     animation: fadeInUp 0.8s ease-out 0.8s both;
     font-family: Arial, sans-serif;
 }
@@ -330,15 +340,15 @@ header.scrolled {
 }
 
 .stat-number {
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: 800;
     color: #06b6d4;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
     transition: all 0.5s ease-in-out;
 }
 
 .stat-label {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.6);
 }
 
@@ -354,26 +364,26 @@ header.scrolled {
     }
 }
 
-
 .hero-visual {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
-    height: 500px;
+    height: 400px;
 }
 
 .floating-card {
     position: absolute;
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: #06b6d4;
     backdrop-filter: blur(20px);
     animation: floatCard 6s ease-in-out infinite;
@@ -404,6 +414,51 @@ header.scrolled {
 @keyframes floatCard {
     0%, 100% { transform: translateY(0px) rotate(0deg); }
     50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+/* Responsive Design for Hero */
+@media (max-width: 768px) {
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+        padding: 100px 0 20px;
+    }
+    
+    .better_title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .hero-visual {
+        height: 250px;
+    }
+    
+    .floating-card {
+        width: 80px;
+        height: 80px;
+        font-size: 1.5rem;
+    }
+    
+    .hero-stats {
+        gap: 1rem;
+    }
+    
+    .stat-number {
+        font-size: 1.3rem;
+    }
 }
 
 /* AI Workflows Section */
@@ -573,7 +628,6 @@ header.scrolled {
 .workflow-interface {
     margin-top: 2rem;
 }
-
 .upload-area {
     border: 2px dashed rgba(255, 255, 255, 0.2);
     border-radius: 16px;
@@ -703,4 +757,166 @@ header.scrolled {
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 1rem;
   }
-  
+  .fas {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: inline-block;
+}
+
+/* File Search Icon Specific Styling */
+.fa-file-search::before {
+    content: "\f15c";
+}
+
+.fas.fa-file-search {
+    font-size: 1rem;
+    color: #06b6d4;
+    transition: all 0.3s ease;
+    text-shadow: 0 2px 4px rgba(6, 182, 212, 0.3);
+}
+
+/* Enhanced File Search Icon with Hover Effect */
+.fas.fa-file-search:hover {
+    color: #4f46e5;
+    transform: scale(1.1);
+    text-shadow: 0 4px 8px rgba(79, 70, 229, 0.4);
+    filter: drop-shadow(0 0 8px rgba(79, 70, 229, 0.5));
+}
+
+/* File Search Icon in Different Contexts */
+
+/* In buttons */
+.cta-button .fas.fa-file-search {
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+    color: inherit;
+}
+
+.cta-button:hover .fas.fa-file-search {
+    transform: translateX(2px) scale(1.05);
+}
+
+/* In navigation */
+.nav-links .fas.fa-file-search {
+    font-size: 0.85rem;
+    margin-right: 0.3rem;
+    opacity: 0.8;
+}
+
+.nav-links a:hover .fas.fa-file-search {
+    opacity: 1;
+    color: #06b6d4;
+    transform: translateY(-1px);
+}
+
+/* In workflow cards */
+.workflow-icon .fas.fa-file-search {
+    font-size: 2.5rem;
+    color: white;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* In floating cards */
+.floating-card .fas.fa-file-search {
+    font-size: 2.2rem;
+    color: #06b6d4;
+    text-shadow: 0 2px 12px rgba(6, 182, 212, 0.6);
+    filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.3));
+}
+
+/* In hero badge */
+.hero-badge .fas.fa-file-search {
+    font-size: 0.8rem;
+    color: #06b6d4;
+    margin-right: 0.3rem;
+}
+
+/* Animation variants for file search icon */
+.fas.fa-file-search.pulse {
+    animation: fileSearchPulse 2s ease-in-out infinite;
+}
+
+.fas.fa-file-search.bounce {
+    animation: fileSearchBounce 1.5s ease-in-out infinite;
+}
+
+.fas.fa-file-search.glow {
+    filter: drop-shadow(0 0 10px currentColor);
+    animation: fileSearchGlow 2s ease-in-out infinite alternate;
+}
+
+/* Size variants */
+.fas.fa-file-search.fa-xs { font-size: 0.75rem; }
+.fas.fa-file-search.fa-sm { font-size: 0.875rem; }
+.fas.fa-file-search.fa-lg { font-size: 1.33em; }
+.fas.fa-file-search.fa-xl { font-size: 1.5em; }
+.fas.fa-file-search.fa-2x { font-size: 2em; }
+.fas.fa-file-search.fa-3x { font-size: 3em; }
+.fas.fa-file-search.fa-4x { font-size: 4em; }
+.fas.fa-file-search.fa-5x { font-size: 5em; }
+
+/* Color variants */
+.fas.fa-file-search.text-primary { color: #4f46e5; }
+.fas.fa-file-search.text-secondary { color: #06b6d4; }
+.fas.fa-file-search.text-success { color: #10b981; }
+.fas.fa-file-search.text-warning { color: #f59e0b; }
+.fas.fa-file-search.text-danger { color: #ef4444; }
+.fas.fa-file-search.text-white { color: #ffffff; }
+.fas.fa-file-search.text-gray { color: #6b7280; }
+
+/* Animations */
+@keyframes fileSearchPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.15);
+        opacity: 0.8;
+    }
+}
+
+@keyframes fileSearchBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes fileSearchGlow {
+    0% {
+        filter: drop-shadow(0 0 5px currentColor);
+    }
+    100% {
+        filter: drop-shadow(0 0 15px currentColor);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .workflow-icon .fas.fa-file-search {
+        font-size: 2rem;
+    }
+    
+    .floating-card .fas.fa-file-search {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .workflow-icon .fas.fa-file-search {
+        font-size: 1.5rem;
+    }
+    
+    .floating-card .fas.fa-file-search {
+        font-size: 1.4rem;
+    }
+}

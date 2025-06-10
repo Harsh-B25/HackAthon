@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.6.10)  10 JUN 2025 10:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.6.10)  10 JUN 2025 17:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -59,8 +59,7 @@ ef
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count273
 \l__pdf_internal_box=\box52
-)
-No file confidentiality.aux.
+) (./confidentiality.aux)
 \openout1 = `confidentiality.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
@@ -77,6 +76,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
 LaTeX Font Info:    ... okay on input line 7.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
 LaTeX Font Info:    ... okay on input line 7.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -123,7 +123,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 11.
 
-Overfull \hbox (4.7738pt too wide) in paragraph at lines 13--14
+Overfull \hbox (22.00696pt too wide) in paragraph at lines 13--14
 []\OT1/cmr/bx/n/12 Company: $[]$\OT1/cmr/m/n/12 , a com-pany or-ga-nized and ex
 -ist-ing un-der the laws of $[]$,
  []
@@ -154,17 +154,17 @@ L3 programming layer <2025-01-18>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 1084 strings out of 474662
- 18606 string characters out of 5751109
- 414791 words of memory out of 5000000
- 24179 multiletter control sequences out of 15000+600000
+ 1087 strings out of 474662
+ 18678 string characters out of 5751109
+ 414782 words of memory out of 5000000
+ 24180 multiletter control sequences out of 15000+600000
  562486 words of font info for 48 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  57i,6n,65p,652b,109s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx1
 2.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mr12.pfb>
-Output written on confidentiality.pdf (6 pages, 52673 bytes).
+Output written on confidentiality.pdf (6 pages, 52656 bytes).
 PDF statistics:
  33 PDF objects out of 1000 (max. 8388607)
  20 compressed objects within 1 object stream
